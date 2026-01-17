@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIMATIKA - LOGIN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png" type="image/x-icon"> <!-- Ganti 'favicon.ico' dengan lokasi file favicon Anda -->
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka One', cursive;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      width: 200vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('LATAR1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    .container > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+
+    .login-container {
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 24rem;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .login-container:hover {
+      transform: scale(1.05);
+    }
+
+    .title-kids {
+      color: #0aa5ff;
+      text-shadow: 1px 1px #ffd700;
+    }
+
+    label {
+      color: #444;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.5) translateY(200px); opacity: 0; }
+      60% { transform: scale(1.1) translateY(-20px); opacity: 1; }
+      80% { transform: scale(0.95) translateY(10px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .pojok-loncat {
+      position: fixed;
+      bottom: -2px;
+      right: 5px;
+      width: 200px;
+      z-index: 1001;
+      animation: bounceIn 1.5s ease-out forwards, float 3s ease-in-out infinite;
+    }
+
+    .teks-loncat {
+      position: fixed;
+      bottom: 300px;
+      right: 25px;
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #000000;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      z-index: 1002;
+      animation: bounceIn 1.5s ease-out forwards;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="overlay"></div>
+
+    <div class="login-container">
+      <h2 class="text-4xl font-bold text-center title-kids mb-6">🎮 Ayo Masuk!</h2>
+      <form onsubmit="return cekPassword(event)">
+        <div class="mb-5">
+          <label for="username" class="block text-sm font-medium mb-1">🧒 Nama Kamu</label>
+          <input type="text" id="username" name="username" placeholder="Contoh: Budi123"
+            class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition duration-200 ease-in-out">
+        </div>
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium mb-1">🔒 Kata Rahasia</label>
+          <input type="password" id="password" name="password" placeholder="••••••••"
+            class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition duration-200 ease-in-out">
+        </div>
+        <button type="submit"
+          class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-xl w-full transform transition duration-300 hover:scale-105 shadow-lg">
+          🚀 Masuk Sekarang
+        </button>
+      </form>
+      <p class="text-center text-gray-600 text-sm mt-5">
+        Kamu Perlu Panduan? 
+        <a href="panduan.html" class="text-pink-500 hover:text-pink-700 font-semibold"> Panduan!</a>
+      </p>
+    </div>
+
+    <img src="KARAKTER1.png" alt="Maskot" class="pojok-loncat" />
+    <div class="teks-loncat">"Ayo, minta guru masukkan sandinya dulu."</div>
+  </div>
+
+  <audio id="bg-audio" autoplay>
+    <source src="LATAR1.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <script>
+    window.addEventListener('load', () => {
+      const bgAudio = document.getElementById('bg-audio');
+      bgAudio.volume = 0.1;
+      bgAudio.play().catch(e => console.log('Autoplay musik gagal:', e));
+    });
+
+    function cekPassword(event) {
+      event.preventDefault();
+      const sandi = document.getElementById("password").value;
+      if (sandi === "12345678") {
+        window.location.href = "menu.html";
+      } else {
+        alert("Kata rahasia salah! Coba lagi ya.");
+      }
+    }
+  </script>
+</body>
+</html>

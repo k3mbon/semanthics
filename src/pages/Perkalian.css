@@ -1,0 +1,653 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+#root {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3e8ff; /* Light Purple fallback */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.perkalian-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: url('/LATAR3.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Header Bar */
+.header-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    z-index: 10;
+    position: relative;
+    flex-shrink: 0;
+    height: 15vh;
+    min-height: 80px;
+}
+
+.question-card {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 3px solid #9333ea; /* Purple border */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 800px;
+    width: 60%;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #333;
+    white-space: pre-line;
+    flex: 1;
+    font-weight: 500;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.3;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0 10px;
+}
+
+.nav-arrow:hover {
+    color: #9333ea;
+}
+
+.exit-button {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    background-color: #ef4444;
+    color: white;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+    font-size: 1rem;
+}
+
+.exit-button:hover {
+    transform: scale(1.05);
+    background-color: #dc2626;
+}
+
+/* Main Layout */
+.main-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 0;
+    gap: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 100px;
+    min-width: 100px;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 5px;
+    gap: 20px;
+    overflow-y: auto;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+
+.sidebar-icon {
+    width: 60px;
+    height: 60px;
+    cursor: grab;
+    transition: transform 0.2s;
+}
+
+.sidebar-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+.sidebar-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Game Center */
+.game-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 20px;
+}
+
+/* Counting Area */
+.counting-area {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    max-height: 40vh;
+    overflow-y: auto;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.grid-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.group-label {
+    font-weight: bold;
+    color: #6b21a8; /* Dark Purple */
+    background-color: rgba(255,255,255,0.8);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.grid-group {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dashed #9333ea; /* Purple dashed */
+    min-width: 120px;
+    min-height: 120px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust based on needs, Perkalian can have variable size */
+    gap: 5px;
+    justify-items: center;
+    align-items: center;
+}
+
+.grid-group.correct {
+    border-color: #22c55e;
+    background-color: rgba(220, 252, 231, 0.7);
+}
+
+.grid-group.incorrect {
+    border-color: #ef4444;
+    background-color: rgba(254, 226, 226, 0.7);
+}
+
+.grid-slot {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid #d8b4fe; /* Light purple */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-slot.filled {
+    background-color: #f3e8ff;
+}
+
+.grid-slot.highlight {
+    background-color: #e9d5ff;
+    border-color: #9333ea;
+}
+
+.grid-item-img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+/* Bottom Area */
+.bottom-area {
+    width: 100%;
+    padding: 10px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    margin-top: auto; 
+    position: relative;
+    gap: 15px;
+}
+
+/* Trash Bin */
+.trash-bin {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 40px;
+    bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.trash-bin::after {
+    content: '🗑️';
+    font-size: 2rem;
+}
+
+.trash-bin.hover {
+    transform: scale(1.1);
+    background-color: #ffebee;
+    border-color: red;
+}
+
+/* Equation Bar */
+.equation-bar {
+    background-color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dropzone.eq-slot {
+    width: 90px;
+    height: 70px;
+    border: 2px dashed #9ca3af;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    background-color: #f3f4f6;
+}
+
+.dropzone.eq-slot:not(:empty) {
+    border-style: solid;
+    background-color: white;
+}
+
+.dropzone.correct {
+    border-color: #22c55e !important;
+    background-color: #dcfce7 !important;
+}
+
+.dropzone.incorrect {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+}
+
+/* Check Button */
+.check-button {
+    background-color: #9333ea; /* Purple */
+    color: white;
+    border: none;
+    padding: 12px 60px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #6b21a8;
+    transition: transform 0.1s;
+    letter-spacing: 1px;
+}
+
+.check-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #6b21a8;
+}
+
+/* Number Strip */
+.number-strip {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+}
+
+.draggable-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: grab;
+    padding: 0 8px;
+    transition: transform 0.2s;
+    line-height: 1;
+    font-family: sans-serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.draggable-number:hover {
+    transform: scale(1.2);
+}
+
+/* Specific Number Colors */
+.draggable-number[data-value="0"] { color: black; }
+.draggable-number[data-value="1"] { color: blue; }
+.draggable-number[data-value="2"] { color: green; }
+.draggable-number[data-value="3"] { color: #facc15; text-shadow: 1px 1px 0 #ca8a04; }
+.draggable-number[data-value="4"] { color: orange; }
+.draggable-number[data-value="5"] { color: cyan; }
+.draggable-number[data-value="6"] { color: purple; }
+.draggable-number[data-value="7"] { color: pink; }
+.draggable-number[data-value="8"] { color: red; }
+.draggable-number[data-value="9"] { color: black; }
+
+.operator-btn {
+    background-color: #9333ea; /* Purple operators */
+    color: white !important;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin-left: 8px;
+    padding: 0;
+    text-shadow: none;
+}
+
+/* Mascot & FAQ */
+.mascot-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    z-index: 50; 
+}
+
+.mascot-img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+
+.faq-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #9333ea;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.faq-button:hover {
+    background-color: #7e22ce;
+}
+
+/* Popup Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.popup-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.popup-content button {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background-color: #9333ea;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.popup-content button:hover {
+    background-color: #7e22ce;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .question-card {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .perkalian-bg {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        overflow-y: auto;
+        height: 100%;
+        padding-bottom: 20px;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 80px; 
+        flex-direction: row;
+        margin-bottom: 5px;
+        overflow-x: auto; 
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding: 5px 10px;
+        gap: 15px;
+    }
+
+    .exit-button {
+        position: static;
+        margin-top: 10px;
+        padding: 8px 20px;
+        align-self: center;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .question-card {
+        width: 95%;
+        max-width: none;
+    }
+    
+    .game-center {
+        justify-content: flex-start;
+        gap: 15px;
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .counting-area {
+        max-height: none; /* Allow expansion */
+        padding: 0 10px;
+    }
+    
+    .grid-group {
+        grid-template-columns: repeat(3, 1fr);
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+    .equation-bar {
+        padding: 10px 15px;
+        gap: 10px;
+        width: 95%;
+    }
+    
+    .mascot-area {
+        position: static;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .trash-bin {
+        position: static;
+        width: 50px;
+        height: 60px;
+    }
+
+    .bottom-area {
+        flex-direction: column-reverse; /* Stack number strip above equation? or keep normal? Penjumlahan uses reverse. */
+        /* If reverse: Number Strip (bottom in HTML) -> Top. Equation (top in HTML) -> Bottom. */
+        /* But here Equation is above Number Strip in HTML. */
+        /* If we want Equation on top, Number Strip below. */
+        /* But on mobile, usually Input (Number Strip) is near fingers (bottom). Equation Display is above. */
+        /* HTML: Equation, Check, Number Strip. */
+        /* Column Reverse: Number Strip (Top), Check (Middle), Equation (Bottom). This is weird. */
+        /* Let's use Column Normal. Equation, Check, Number Strip. */
+        /* Penjumlahan uses Column Reverse because its HTML is different (Equation is OUTSIDE bottom-area). */
+        /* In Perkalian, Equation IS IN bottom-area. */
+        /* So stick to column. */
+        flex-direction: column; 
+        align-items: center;
+        gap: 10px;
+        padding: 5px;
+        margin-top: 0;
+    }
+    
+    .number-strip {
+        max-width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-bar {
+        padding: 5px;
+    }
+    
+    .question-card {
+        padding: 10px;
+        font-size: 0.9rem;
+        width: 95%;
+    }
+    
+    .grid-slot {
+        width: 30px;
+        height: 30px;
+    }
+
+    .grid-group {
+        gap: 2px;
+        padding: 5px;
+    }
+    
+    .sidebar-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .dropzone.eq-slot {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .check-button {
+        padding: 10px 40px;
+        font-size: 1rem;
+    }
+    
+    .draggable-number {
+        font-size: 1.8rem;
+        padding: 0 5px;
+    }
+
+    .operator-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1.5rem;
+    }
+}

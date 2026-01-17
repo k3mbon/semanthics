@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SIMATIKA</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="logo-undiksha.png" rel="icon">
+  <link href="logo-undiksha.png" rel="apple-touch-icon">
+  <!-- Intro.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" />
+  <!-- Intro.js JS -->
+  <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-image: url('LATAR3.png'); /* Ganti sesuai nama file gambar */
+}
+
+/* Gaya untuk tombol di samping kiri zona */
+   .left-button, .right-button {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: rebeccapurple;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+   .right-button {
+    background-color: red;
+    border: none; /* Hapus border */
+    color: white; /* Warna teks */
+    padding: 15px 32px; /* Padding untuk ruang di sekitar teks */
+    text-align: center; /* Teks rata tengah */
+    text-decoration: none; /* Hapus garis bawah teks */
+    display: inline-block; /* Tampilan inline block */
+    font-size: 16px; /* Ukuran font */
+    margin: 4px 2px; /* Margin untuk spasi antar tombol */
+    cursor: pointer; /* Cursor berubah menjadi pointer saat hover */
+    border-radius: 8px; /* Sudut membulat */
+    transition: background-color 0.3s ease; /* Animasi transisi saat hover */
+    right: 0px; /* Adjust as necessary */
+    top: 3%; /* Center vertically */
+    transform: translateY(-10%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk memberikan efek kotak */
+}
+    #check-answer:hover {
+    background-color: springgreen; /* Warna tombol saat dihover */
+}
+   .container2 {
+    display: flex;
+    flex-direction: column; /* Tetap vertikal seperti permintaan sebelumnya */
+    justify-content: flex-start; /* Mengatur item ke awal (kiri) sumbu utama */
+    align-items: flex-start; /* Mengatur item ke awal (atas) sumbu silang */
+    margin-left: 0; /* Memastikan tidak ada margin kiri */
+    padding-left: 0; /* Memastikan tidak ada padding kiri */
+    width: 100%; /* Memastikan kontainer mengisi lebar penuh untuk flex-start berfungsi */
+    height: 100%; /* Memastikan kontainer mengisi tinggi penuh jika perlu */
+}
+
+.white-box {
+    background-color: rgb(184, 228, 253);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Tetap vertikal */
+    justify-content: flex-start; /* Pusatkan konten ke awal (kiri) kontainer */
+    align-items: flex-start; /* Pusatkan konten ke awal (atas) kontainer */
+    flex-wrap: wrap;
+    margin-left: 0; /* Memastikan tidak ada margin kiri */
+    padding-left: 0; /* Memastikan tidak ada padding kiri */
+    position: absolute;
+    left: 0%;
+}
+.draggable-BENDA, .draggable2-BENDA, .draggable3-BENDA, .draggable4-BENDA, .draggable5-BENDA, .draggable6-BENDA, .draggable7-BENDA {
+    margin: 10px;
+    padding: 10px;
+    border: none; 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+}
+img {
+    max-width: 100%; 
+    max-height: 100%;
+    display: block; 
+    margin: 0 auto;
+}
+.draggable7-BENDA {
+    margin: 0px;
+    padding: 0px;
+    border: none; 
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+    position: absolute;
+    right: 25%;
+    bottom: 25%;
+    z-index: -1;
+    margin-bottom: 15% ;
+}
+.draggable8-BENDA {
+    margin: 0px;
+    padding: 0px;
+    border: none; 
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+    position: absolute;
+    right: 43%;
+    bottom: 25%;
+    z-index: -1;
+    margin-bottom: 15% ;
+}
+.draggable9-BENDA {
+    margin: 0px;
+    padding: 0px;
+    border: none; 
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+    position: absolute;
+    right: 61%;
+    bottom: 25%;
+    z-index: -1;
+    margin-bottom: 15% ;
+}
+</style>
+
+<style>
+        .container {
+            text-align: center;
+        }
+        .numbers {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+            font-size: 3em; /* Ukuran font besar untuk penekanan */
+        }
+        .number{
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.3s, transform 0.3s;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Menambahkan bayangan ke teks */
+            margin: 0 5px; /* Memberi margin agar ada jarak antar tombol */
+            padding: 10px; /* Memberi padding untuk tampilan yang lebih baik */
+            background-color: #f0f0f0; /* Memberi warna latar belakang */
+            cursor: grab; /* Mengubah kursor saat di atas tombol */
+            font-weight: bold; /* Teks tebal */
+        }
+        .number:nth-child(0) { background-color: whitesmoke; color: brown; }
+        .number:nth-child(1) { background-color: whitesmoke; color: black; }
+        .number:nth-child(2) { background-color: whitesmoke; color: blue; }
+        .number:nth-child(3) { background-color: whitesmoke; color: green; }
+        .number:nth-child(4) { background-color: whitesmoke; color: yellow; }
+        .number:nth-child(5) { background-color: whitesmoke; color: orange; }
+        .number:nth-child(6) { background-color: whitesmoke; color: cyan; }
+        .number:nth-child(7) { background-color: whitesmoke; color: purple; }
+        .number:nth-child(8) { background-color: whitesmoke; color: pink; }
+        .number:nth-child(9) { background-color: whitesmoke; color: red; }
+
+         .icon {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            background-color: grey;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .number:active, .icon:active {
+            transform: scale(0.9); /* Slightly shrink the element when clicked */
+        }
+        .dropzones2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            padding: 10px;
+            border: 4.5px currentColor;
+            border-radius: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 19px 19px rgba(0, 0, 0, 0.1);
+            font-weight: bold; /* Teks tebal */
+        }
+            .dropzone {
+            width: 70px;
+            height: 70px;
+            border: 2px dashed #999;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            color: #555;
+            background-color: #e6f7ff;
+            transition: all 0.8s ease;}
+         
+        .dropzone.dragover {
+            background-color: #e0f7fa; /* Light cyan background when dragging over */
+            border-color: #00bcd4; /* Change border color to cyan when dragging over */
+        }
+
+        .dropzone.tambah {
+            width: 50px;
+            height: 50px;
+        }
+        .dropzone.samadengan {
+            width: 50px;
+            height: 50px;
+        }
+
+        .dropzone.tambah2 {
+            width: 35px;
+            height: 35px;
+            border: 2px dashed #ff0c0c;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            color: #555;
+            background-color: #e6f7ff;
+            position: absolute;
+            top: 24%;
+            left: -20%;
+            z-index: 1000;
+        }
+
+        .dropzone.samadengan2 {
+            width: 35px;
+            height: 35px;
+            border: 2px dashed #ff0c0c;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            color: #555;
+            background-color: #e6f7ff;
+            position: absolute;
+            top: 24%;
+            right: 110%;
+            z-index: 1000;
+        }
+
+    #checkButton { /* TOMBOL CEK */
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #000000;
+            background-color: #ffe609;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            bottom: 26%;
+        }
+         #checkButton:hover {
+            background-color: #b2ff23;
+            box-shadow: 0 15px 20px rgba(0, 123, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        #checkButton:active {
+            background-color: #004080;
+            box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2);
+            transform: translateY(2px);
+        }
+
+.popup, .image-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+    border: 2.5px solid #000000;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000;
+    width: 80%;
+    max-width: 300px;
+}
+.popup h1, .image-popup h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popup p, .image-popup p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.image-popup img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.popup button, .image-popup button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.popup button:hover, .image-popup button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.popup button:active, .image-popup button:active {
+    background-color: #004080;
+    transform: translateY(1px);
+}
+    .white-box2 {
+    background-color: floralwhite; 
+    border-radius: 5px; /* Sudut yang sedikit melengkung */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk memberikan efek kotak */
+    display: flex; /* Gunakan flexbox untuk tata letak */
+    justify-content: center; /* Pusatkan konten secara horizontal */
+    align-items: center; /* Pusatkan konten secara vertikal */
+    flex-wrap: wrap; /* Bungkus elemen jika terlalu banyak */
+    position: absolute;
+    bottom: 10%;
+}
+    </style>
+
+    <style>
+    #box31 {
+    width: 110px;
+    height: 110px;
+    border: 2px dashed #000; /* Garis putus-putus dengan warna hitam */
+    border-radius: 20px;/* Sudut kotak melengkung */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #ffffff;
+    color: #333;
+    position: absolute;
+    left: 10%;
+    bottom: 12%;
+    display: grid;
+    grid-template-columns: repeat(10, 2fr); /* Mengatur grid dengan 5 kolom */
+    grid-gap: 10px; /* Jarak antar elemen */
+    padding: 10px; /* Padding di dalam drop1 */
+    border: 2px solid #000000; /* Batasan drop1 */
+    box-sizing: border-box;
+    } 
+    </style>
+
+    <style>
+.create-image {
+    margin: 5px;
+    padding: 5px;
+    border: none; 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+}
+.draggable {
+    width: 60px; /* UKURAN GAMBAR BISA DISESUAIKAN */
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute; /* POSISI DI ATUR BEBAS DITEMPATKAN */
+    cursor: grab; /* EFEK TANGAN MENGEPAL */
+    left: 12%;
+    top: 76%;
+    z-index: 2;
+}
+    </style>
+
+<style>
+    .container5 { 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 1fr);    /* 2 rows */
+    gap: 4px; /* Add spacing between the grid items */
+    position: fixed;
+    left: 14%;
+    top: 30%;
+        }
+    .container6 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columns */
+        grid-template-rows: repeat(2, 1fr);    /* 2 rows */
+        gap: 4px; /* Add spacing between the grid items */
+        position: fixed;
+        right: 40%;
+        top: 30%;
+        }
+        .container7 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columns */
+        grid-template-rows: repeat(2, 1fr);    /* 2 rows */
+        gap: 4px; /* Add spacing between the grid items */
+        position: fixed;
+        right: 14%;
+        top: 30%;
+        }
+    .box {
+    width: 50px;
+    height: 50px;
+    border: 2px dashed #6b0d4c; /* Garis putus-putus dengan warna hitam */
+    border-radius: 20px;/* Sudut kotak melengkung */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #ffffff;
+    color: #333;
+    position: relative;
+    left: 10%;
+    bottom: 20%;
+    display: grid;
+    grid-template-columns: repeat(10, 2fr); /* Mengatur grid dengan 5 kolom */
+    grid-gap: 10px; /* Jarak antar elemen */
+    padding: 10px; /* Padding di dalam drop1 */
+    border: 2px solid #ff1ea9; /* Batasan drop1 */
+    box-sizing: border-box;
+    } 
+</style>
+  
+<style>
+.soal-box {
+  display: flex;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  width: 160%;
+  font-size: 20px;
+  position: relative;
+}
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  padding: 5px 10px;
+}
+.nav-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+.soal-text {
+  flex: 1;
+  text-align: center;
+}
+  </style>
+
+   <style>
+/* CSS untuk modal video FAQ */
+  #faqModal video {
+  width: 500px;            /* Atur lebar video */
+  max-width: 100%;         /* Supaya responsif di layar kecil */
+  border-radius: 12px;     /* Sudut melengkung */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+  display: block;          /* Agar bisa diatur margin */
+  margin: 0 auto;          /* Pusatkan video */
+}
+  </style>
+
+<style>
+/* Efek mengambang */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* CSS untuk karakter panduan */
+#karakterMascot {
+  width: 100px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.3s ease;
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* Saat tidak tersembunyi (muncul), ubah opasitas */
+#karakterMascot:not(.hidden) {
+  opacity: 1;
+}
+</style>
+
+<style>
+  /* Efek transisi munculnya karakter */
+#karakterMascot {
+  width: 100px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: fixed;
+  bottom: 100px; /* posisinya muncul di atas tombol FAQ */
+  right: 30px;
+  z-index: 50; /* di atas elemen lain */
+}
+
+/* Saat tidak tersembunyi, karakter muncul */
+#karakterMascot:not(.hidden) {
+  opacity: 1;
+}
+</style>
+
+</head>
+<body>
+  
+<!-- AREA FAQ (USER GUIDE) ----------------------------------------------------------------------------------------->
+<!-- Tombol FAQ di pojok kanan bawah -->
+<button id="openFaqBtn"
+  class="fixed bottom-5 right-5 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 z-50">
+  FAQ
+</button>
+
+<!-- Modal FAQ (disembunyikan awalnya) -->
+<div id="faqModal"
+  class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-40 hidden">
+  <div class="bg-white w-[90%] max-w-2xl p-6 rounded-xl shadow-xl relative">
+    
+    <!-- Tombol Tutup -->
+    <button id="closeFaqBtn"
+      class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+
+    <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Video Panduan Penggunaan</h2>
+
+    <!-- ✅ Video Panduan -->
+    <video id="videoPanduan" controls class="w-full rounded-lg shadow-md">
+      <source src="../PANDUAN SIMATIKA.mp4" type="video/mp4">
+      Browser Anda tidak mendukung pemutaran video.
+    </video>
+  </div>
+</div>
+<!-- END AREA FAQ (USER GUIDE) ------------------------------------------------------------------------------------->
+
+
+<!-- KARAKTER DI POJOK KANAN ------------------------------------------------------------------------------------->
+<img id="karakterMascot"
+  src="../KARAKTER2.png"
+  alt="Karakter Panduan"
+  class="fixed bottom-20 right-5 w-20 h-auto z-40 hidden rounded-full shadow-lg hover:scale-105 transition-all duration-300">
+<!-- KARAKTER DI POJOK KANAN ------------------------------------------------------------------------------------->
+
+
+<!--  AREA SOAL (KOTAK SOAL)----------------------------------------------------------------------------------------->
+  <div class="soal-container">
+    <div class="soal-box">
+      <button class="nav-btn" onclick="prevSoal()" id="btnPrev">◀</button>
+      <div class="soal-text" id="soalBox">Soal 1: 5 + 3 = ...</div>
+      <button class="nav-btn" onclick="nextSoal()" id="btnNext">▶</button>
+    </div>
+  </div>
+<!--  AREA SOAL (KOTAK SOAL)----------------------------------------------------------------------------------------->
+
+
+<!--  KOTAK (KERANJANG)----------------------------------------------------------------------------------------->
+<div class="box box31"  id="box31" data-coconuts="0"></div>
+<!--  KOTAK (KERANJANG)----------------------------------------------------------------------------------------->
+
+  <div class="white-box">
+ <div class="container2">
+
+  <div class="draggable-BENDA" id="createImage" draggable="true">
+    <img src="assets/BOLA.png" alt="Bola">
+  </div>
+    
+  <div class="draggable2-BENDA"  id="kelapa" >
+    <img src="assets/KELAPA.png" alt="Kelapa">
+  </div>
+
+  <div class="draggable3-BENDA"  id="kue">
+    <img src="assets/KUE.png" alt="Kue">
+  </div>
+
+  <div class="draggable4-BENDA"  id="mangga">
+    <img src="assets/MANGGA.png" alt="Mangga">
+  </div>
+
+  <div class="draggable5-BENDA" id="ayam">
+    <img src="assets/AYAM.png" alt="Ayam">
+  </div>
+ </div>
+</div> 
+<div class="dropzones2">
+  <div class="dropzone" id="zone1" data-zone="1"></div>
+   <div class="dropzone tambah" id="zone4" data-zone="4"></div>
+     <div class="dropzone" id="zone2" data-zone="2"></div>
+       <div class="dropzone samadengan" id="zone5" data-zone="5"></div>
+         <div class="dropzone" id="zone3" data-zone="3"></div>
+          </div>
+            <button id="checkButton">Koreksi</button>
+             </div>
+
+<!-- GRUP1 ----------------------------------------------------------------------------------------->
+<div class="white-box2">
+        <div class="numbers">
+            <div class="number" draggable="true" data-value="0" data-img="0.png">0</div>
+            <div class="number" draggable="true" data-value="1" data-img="1.png">1</div>
+            <div class="number" draggable="true" data-value="2" data-img="2.png">2</div>
+            <div class="number" draggable="true" data-value="3" data-img="3.png">3</div>
+            <div class="number" draggable="true" data-value="4" data-img="4.png">4</div>
+            <div class="number" draggable="true" data-value="5" data-img="5.png">5</div>
+            <div class="number" draggable="true" data-value="6" data-img="6.png">6</div>
+            <div class="number" draggable="true" data-value="7" data-img="7.png">7</div>
+            <div class="number" draggable="true" data-value="8" data-img="8.png">8</div>
+            <div class="number" draggable="true" data-value="9" data-img="9.png">9</div>
+            <div class="icon"   draggable="true" data-value="-">-</div>
+            <div class="icon"   draggable="true" data-value="=">=</div>
+        </div>
+       </div>
+<!-- GRUP1 ----------------------------------------------------------------------------------------->
+
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+<div class="container5">
+<div id="box1" class="box box1" data-coconuts="0"></div>  
+<div id="box2" class="box box2" data-coconuts="0"></div>  
+<div id="box3" class="box box3" data-coconuts="0"></div>  
+<div id="box4" class="box box4" data-coconuts="0"></div> 
+<div id="box5" class="box box5" data-coconuts="0"></div> 
+<div id="box6" class="box box6" data-coconuts="0"></div> 
+<div id="box7" class="box box7" data-coconuts="0"></div> 
+<div id="box8" class="box box8" data-coconuts="0"></div> 
+<div id="box9" class="box box11" data-coconuts="0"></div> 
+<div id="box10" class="box box10" data-coconuts="0"></div> 
+</div>
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+<div class="container6">
+    <div id="box11" class="box box11" data-coconuts="0"></div>  
+    <div id="box12" class="box box12" data-coconuts="0"></div>  
+    <div id="box13" class="box box13" data-coconuts="0"></div>  
+    <div id="box14" class="box box14" data-coconuts="0"></div> 
+    <div id="box15" class="box box15" data-coconuts="0"></div> 
+    <div id="box16" class="box box16" data-coconuts="0"></div> 
+    <div id="box17" class="box box17" data-coconuts="0"></div> 
+    <div id="box18" class="box box18" data-coconuts="0"></div> 
+    <div id="box19" class="box box19" data-coconuts="0"></div> 
+    <div id="box20" class="box box20" data-coconuts="0"></div> 
+    <div class="dropzone tambah2"id="zone6"data-zone="6"></div>
+</div>
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+
+
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+<div class="container7">
+    <div class="dropzone samadengan2" id="zone7="data-zone="7"></div>
+    <div id="box21" class="box box21" data-coconuts="0"></div>  
+    <div id="box22" class="box box22" data-coconuts="0"></div>  
+    <div id="box23" class="box box23" data-coconuts="0"></div>  
+    <div id="box24" class="box box24" data-coconuts="0"></div> 
+    <div id="box25" class="box box25" data-coconuts="0"></div> 
+    <div id="box26" class="box box26" data-coconuts="0"></div> 
+    <div id="box27" class="box box27" data-coconuts="0"></div> 
+    <div id="box28" class="box box28" data-coconuts="0"></div> 
+    <div id="box29" class="box box29" data-coconuts="0"></div> 
+    <div id="box30" class="box box30" data-coconuts="0"></div> 
+</div>
+<!-- KOTAK ZONA----------------------------------------------------------------------------------------->
+
+
+<!-- AREA POPUP GAMBAR & PERINGATAN ------------------------------------------------------------------------------------------>
+    <div id="popup" class="popup">
+        <span id="popupMessage"></span>
+        <button id="closePopup">Tutup</button>
+    </div>
+
+    <div id="imagePopup" class="image-popup">
+        <img id="popupImage" src="" alt="Gambar">
+        <button id="closeImagePopup">Tutup</button>
+    </div>
+<!-- AREA POPUP GAMBAR & PERINGATAN ------------------------------------------------------------------------------------------>
+
+<!-- AREA TOMBOL KELUAR ------------------------------------------------------------------------------------------>
+    
+<button class="right-button" onclick="window.location.href='../pop.up.beranda.html'">Keluar</button>
+
+<!-- AREA TOMBOL KELUAR------------------------------------------------------------------------------------------>
+
+
+<script>
+    let count = 0;
+  
+    document.getElementById('createImage').addEventListener('click', () => {
+        count++;
+        const draggable = document.createElement('img');
+        draggable.className = 'draggable';
+        draggable.id = `draggable-${count}`;
+        draggable.src = 'assets/BOLA.png'; // GAMBAR YANG AKAN DI CLONE UNTUK DIMASUKKAN DI DALAM DROP1 (DIGUNAKAN UNTUK PEBAGIAN)
+        draggable.draggable = true;
+        document.body.appendChild(draggable);
+  
+        draggable.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.id);
+        });
+  
+        document.querySelectorAll('.box').forEach((box) => {
+            box.addEventListener('dragover', (event) => {
+                event.preventDefault();
+            });
+  
+            box.addEventListener('drop', (event) => {
+                event.preventDefault();
+                const id = event.dataTransfer.getData('text/plain');
+                const draggedElement = document.getElementById(id);
+                const rect = box.getBoundingClientRect();
+                draggedElement.style.left = `${event.clientX - rect.left - draggedElement.clientWidth / 2}px`;
+                draggedElement.style.top = `${event.clientY - rect.top - draggedElement.clientHeight / 2}px`;
+                box.appendChild(draggedElement);
+
+                // Check if the box already contains an image
+    const existingImage = box.querySelector('img');
+    if (existingImage) {
+      box.removeChild(existingImage);
+    }
+
+    box.appendChild(draggedElement);
+                
+               // Update result elements
+               updateResultElements();
+
+            });
+        });
+    });
+
+  </script>
+
+<script>
+    const numbers = document.querySelectorAll('.number');
+    const icons = document.querySelectorAll('.icon');
+    const dropzones = document.querySelectorAll('.dropzone');
+    const imagePopup = document.getElementById('imagePopup');
+    const popupImage = document.getElementById('popupImage');
+    const closeImagePopup = document.getElementById('closeImagePopup');
+    const checkButton = document.getElementById('checkButton');
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popupMessage');
+    const closePopup = document.getElementById('closePopup');
+    
+    numbers.forEach(number => {
+        number.addEventListener('dragstart', dragStart);
+        number.addEventListener('click', showImage);
+    });
+
+    icons.forEach(icon => {
+        icon.addEventListener('dragstart', dragStart);
+    });
+
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', dragOver);
+        dropzone.addEventListener('drop', drop);
+        dropzone.addEventListener('dragleave', dragLeave); 
+    });
+
+    closeImagePopup.addEventListener('click', () => imagePopup.style.display = 'none');
+    checkButton.addEventListener('click', checkResult);
+    closePopup.addEventListener('click', () => popup.style.display = 'none');
+
+    function dragStart(event) {
+        event.dataTransfer.setData('text', event.target.textContent);
+        event.dataTransfer.setData('type', event.target.dataset.value);
+        event.target.classList.add('dragged');        
+    }
+
+    function dragOver(event) {
+        event.preventDefault();
+        event.target.classList.add('droppable'); 
+    }
+    
+    function drop(event) {
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text');
+        const type = event.dataTransfer.getData('type');
+
+        const targetId = event.target.id;
+
+        // Validasi: hanya izinkan angka untuk zone1, zone2, zone3
+        if ((targetId === 'zone1' || targetId === 'zone2' || targetId === 'zone3') && isNaN(data)) {
+            return;
+        }
+
+        // Validasi: khusus zone4 hanya boleh tanda -
+        if (targetId === 'zone4' && type !== '-') {
+            return;
+        }
+
+        // Validasi: khusus zone5 hanya boleh tanda =
+        if (targetId === 'zone5' && type !== '=') {
+            return;
+        }
+
+        // Set isi konten zona sesuai data yang di-drop
+        event.target.textContent = data;
+
+        // Hapus class dragged
+        document.querySelectorAll('.dragged').forEach(el => el.classList.remove('dragged'));
+    }
+
+    function dragLeave(event) {
+        event.target.classList.remove('droppable'); 
+    }
+
+    function showImage(event) {
+        const imgSrc = event.target.dataset.img;
+        popupImage.src = imgSrc;
+        imagePopup.style.display = 'block';
+    }
+
+    function checkResult() {
+        const zone1Value = parseInt(document.getElementById('zone1').textContent);
+        const zone2Value = parseInt(document.getElementById('zone2').textContent);
+        const zone3Value = parseInt(document.getElementById('zone3').textContent);
+        const zone4HasMinusSign = document.getElementById('zone4').textContent === '-';
+        const zone5HasEqualsSign = document.getElementById('zone5').textContent === '=';
+
+        if (!zone4HasMinusSign || !zone5HasEqualsSign) {
+            popupMessage.textContent = 'Tempatkan tanda - dan = terlebih dahulu!';
+            popup.style.display = 'block';
+            return;
+        }
+
+        if (isNaN(zone1Value) || isNaN(zone2Value) || isNaN(zone3Value)) {
+            popupMessage.textContent = 'Silakan isi semua angka terlebih dahulu!';
+            popup.style.display = 'block';
+            return;
+        }
+
+        const correct = (zone1Value - zone2Value) === zone3Value;
+        popupMessage.textContent = correct ? 'Benar!' : 'Salah!';
+        popup.style.display = 'block';
+    }
+</script>
+
+
+
+<script>
+    // Mengambil elemen yang ingin dijadikan clickable
+    var benda = document.getElementById('kue');
+  
+    // Menambahkan event listener untuk event klik
+    benda.addEventListener('click', function() {
+      // Mengarahkan pengguna ke halaman yang ditentukan
+      window.location.href = 'kue.html';
+    });
+  </script>
+  
+  <script>
+    // Mengambil elemen yang ingin dijadikan clickable
+    var benda = document.getElementById('ayam');
+  
+    // Menambahkan event listener untuk event klik
+    benda.addEventListener('click', function() {
+      // Mengarahkan pengguna ke halaman yang ditentukan
+      window.location.href = 'ayam.html';
+    });
+  </script>
+  
+  <script>
+    // Mengambil elemen yang ingin dijadikan clickable
+    var benda = document.getElementById('kelapa');
+  
+    // Menambahkan event listener untuk event klik
+    benda.addEventListener('click', function() {
+      // Mengarahkan pengguna ke halaman yang ditentukan
+      window.location.href = 'kelapa.html';
+    });
+  </script>
+  
+  <script>
+    // Mengambil elemen yang ingin dijadikan clickable
+    var benda = document.getElementById('mangga');
+  
+    // Menambahkan event listener untuk event klik
+    benda.addEventListener('click', function() {
+      // Mengarahkan pengguna ke halaman yang ditentukan
+      window.location.href = 'mangga.html';
+    });
+  </script>
+
+   <script>
+  const soals = [
+  "Soal 1:\nDoni memiliki 10 bola. Ia memberikan 4 bola kepada temannya.\nBerapa bola yang masih dimiliki Doni?",
+  "Soal 2:\nSeorang peternak memiliki 18 ayam. Ia menjual 6 ayam ke pasar.\nBerapa ayam yang masih ada di kandang?",
+  "Soal 3:\nWayan memetik 12 kelapa dari pohon. Ia membagikan 5 kelapa kepada tetangganya.\nBerapa kelapa yang masih dimilikinya?",
+  "Soal 4:\nIbu membuat 20 kue. 7 kue diberikan ke tamu.\nBerapa kue yang masih tersisa di meja?",
+  "Soal 5:\nMade membawa 15 mangga ke pasar. Ia berhasil menjual 9 mangga.\nBerapa mangga yang belum terjual?"
+  ];
+  let index = 0;
+
+  function tampilkanSoal() {
+    document.getElementById("soalBox").textContent = soals[index];
+    document.getElementById("btnPrev").disabled = index === 0;
+    document.getElementById("btnNext").disabled = index === soals.length - 1;
+  }
+
+  function nextSoal() {
+    if (index < soals.length - 1) {
+      index++;
+      tampilkanSoal();
+    }
+  }
+
+  function prevSoal() {
+    if (index > 0) {
+      index--;
+      tampilkanSoal();
+    }
+  }
+
+  // Inisialisasi pertama
+  tampilkanSoal();
+</script>
+
+<!-- Script untuk membuka dan menutup modal -->
+<script>
+  const openFaqBtn = document.getElementById("openFaqBtn");
+  const closeFaqBtn = document.getElementById("closeFaqBtn");
+  const faqModal = document.getElementById("faqModal");
+  const videoPanduan = document.getElementById("videoPanduan");
+
+  openFaqBtn.addEventListener("click", () => {
+    faqModal.classList.remove("hidden");
+  });
+
+  closeFaqBtn.addEventListener("click", () => {
+    faqModal.classList.add("hidden");
+    
+    // Jeda dan reset video
+    if (videoPanduan) {
+      videoPanduan.pause();
+      videoPanduan.currentTime = 0;
+    }
+  });
+</script>
+
+
+<!-- Script untuk autoplay video di modal FAQ & menutup modal saat video selesai -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("faqModal");
+  const video = document.getElementById("faqVideo");
+
+  // Tampilkan modal FAQ saat halaman dimuat
+  modal.classList.remove("hidden");
+
+  // Autoplay video jika diperbolehkan oleh browser
+  video.play().catch(function (err) {
+    console.log("Autoplay ditolak oleh browser:", err);
+  });
+
+  // Tutup modal saat video selesai
+  video.onended = function () {
+    modal.classList.add("hidden");
+  };
+});
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("videoPanduan");
+    const modal = document.getElementById("faqModal");
+    const karakter = document.getElementById("karakterMascot");
+    const btnTutup = document.getElementById("closeFaqBtn");
+
+    // Muncul setelah video selesai
+    video.onended = function () {
+      modal.classList.add("hidden");
+      setTimeout(() => {
+        karakter.classList.remove("hidden");
+      }, 500);
+    };
+
+    // Muncul juga kalau ditutup manual
+    btnTutup.addEventListener("click", function () {
+      modal.classList.add("hidden");
+      karakter.classList.remove("hidden");
+    });
+  });
+</script>
+</body>
+</html>

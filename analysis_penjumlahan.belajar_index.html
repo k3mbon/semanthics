@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIMATIKA</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .bg-blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('LATAR3.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px);
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .custom-video {
+      max-width: 540px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+  <!-- Background -->
+  <div class="bg-blur"></div>
+  <div class="overlay"></div>
+
+  <!-- Header -->
+  <header class="bg-blue-700 w-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 py-4 shadow-lg rounded-b-3xl z-10">
+    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+      <img src="logo.undiksha.png" alt="logo" class="h-16 w-16 md:h-20 md:w-20 rounded-full shadow-md">
+      <h1 class="text-white text-3xl md:text-4xl font-bold">SIMATIKA</h1>
+    </div>
+    <nav class="flex space-x-4 md:space-x-6 flex-wrap justify-center md:justify-end">
+      <a href="../menu.html" class="text-white text-base md:text-lg font-medium hover:underline">Beranda</a>
+      <a href="#" class="text-white text-base md:text-lg font-medium hover:underline">Materi</a>
+      <a href="#" class="text-white text-base md:text-lg font-medium hover:underline">Latihan</a>
+      <a href="../penjumlahan/index.html" class="bg-yellow-400 text-blue-800 px-5 py-2 rounded-full font-semibold shadow hover:bg-yellow-500 transition inline-block text-center">
+        Mulai
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center p-8 z-10">
+    <div class="bg-gray-900 bg-opacity-70 rounded-2xl p-6 md:p-8 shadow-2xl w-full max-w-4xl flex flex-col items-center">
+      <h2 class="text-white text-2xl font-bold mb-4">Belajar Penjumlahan</h2>
+      <video id="video" class="custom-video" controls poster="poster.jpg">
+        <source src="penjumlahan.belajar.mp4" type="video/mp4">
+        Browser Anda tidak mendukung pemutaran video.
+      </video>
+    </div>
+  </main>
+
+  <!-- Kotak Terjemah -->
+  <section class="w-full flex justify-center px-4 z-10 mb-6">
+    <div class="bg-white rounded-xl p-6 shadow-lg max-w-2xl w-full text-center">
+      <p id="kotak-terjemah" class="text-gray-700 text-base md:text-lg">
+        Ayo kita belajar anak-anak dengan semangat dan penuh keceriaan!
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto p-4 text-center text-gray-200 text-sm z-10">
+    &copy; 2025 SIMATIKA - All Rights Reserved
+  </footer>
+
+  <!-- JavaScript Subtitle ke Kotak Terjemah -->
+  <script>
+    const video = document.getElementById('video');
+    const kotakTerjemah = document.getElementById('kotak-terjemah');
+
+    const subtitles = [
+      { time: 0, text: "Ruangan gelap, berisi sofa, lampu, dan rak buku. Perlahan cerah, terlihat tanaman." },
+      { time: 5, text: "Logo lingkaran biru dan kuning muncul, lalu memudar digantikan lingkaran putih." },
+      { time: 10, text: "Gambar anak laki-laki dengan angka '7' dan '2'. Teks: 'Pengenalan Angka dan Penjumlahan'." },
+      { time: 15, text: "Teks dan gambar tetap di layar, lalu memudar. Ruangan sedikit menggelap." },
+      { time: 20, text: "Ruangan kembali cerah, pria berkaos muncul di kanan layar." },
+      { time: 25, text: "Selamat pagi anak-anak, apa kabar?" },
+      { time: 30, text: "Pasti baik dan sehat, semangat ya!" },
+      { time: 35, text: "Perkenalkan nama Bapak." },
+      { time: 40, text: "Ejaan tangan: I M A D E. Teks: 'I Made Wisnugiri'." },
+      { time: 45, text: "Ejaan tangan: W I S N U." },
+      { time: 50, text: "Ejaan tangan: G I R I." },
+      { time: 55, text: "Bapak bekerja sebagai seorang Guru di" },
+      { time: 60, text: "SD Negeri 2 Bengkala." },
+      { time: 65, text: "Ejaan tangan: Bengkala." },
+      { time: 70, text: "Buleleng, Bali. Teks: 'SD Negeri 2 Bengkala, Buleleng, Bali'." },
+      { time: 75, text: "Ejaan tangan: Bali." },
+      { time: 80, text: "Bapak akan memperkenalkan" },
+      { time: 85, text: "Angka isyarat. Teks: 'Angka isyarat'." },
+      { time: 90, text: "dari 0 sampai 9." },
+      { time: 95, text: "Siapakah yang sudah mengenal angka isyarat 0 sampai 9?" },
+      { time: 100, text: "Menunjukkan angka 0 sampai 9 dengan tangan." },
+      { time: 105, text: "Ayo kita ucapkan dan isyaratkan angka." },
+      { time: 110, text: "Isyarat untuk angka 0. Angka '0' muncul." },
+      { time: 115, text: "Isyarat untuk 1, 2, 3. Muncul mangga sesuai jumlahnya." },
+      { time: 120, text: "Isyarat untuk 4, 5, 6 dan mangga yang sesuai." },
+      { time: 125, text: "Isyarat untuk 7, 8, 9 dan mangga yang sesuai." },
+      { time: 130, text: "Mangga dan angka tetap, lalu memudar. Pria muncul kembali." },
+      { time: 135, text: "Belajar mengenal isyarat angka 0 sampai 9." },
+      { time: 140, text: "Sangatlah mudah bukan?" },
+      { time: 145, text: "Kita bisa melakukan" },
+      { time: 150, text: "dengan teman-teman di kelas." },
+      { time: 155, text: "Ayo tetap semangat, dan mari berlatih bersama!" },
+      { time: 160, text: "*Gerakan penyemangat*" },
+      { time: 165, text: "Layar biru tua hingga akhir video." }
+    ];
+
+    video.addEventListener('timeupdate', () => {
+      const currentTime = video.currentTime;
+      for (let i = subtitles.length - 1; i >= 0; i--) {
+        if (currentTime >= subtitles[i].time) {
+          kotakTerjemah.textContent = subtitles[i].text;
+          break;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

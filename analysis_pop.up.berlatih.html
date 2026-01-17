@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMATIKA</title>
+    <link rel="icon" href="logo.png" type="image/x-icon"> <!-- Ganti 'favicon.ico' dengan lokasi file favicon Anda -->
+
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Warna latar belakang gelap */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Padding untuk responsivitas */
+            box-sizing: border-box;
+        }
+        .card-container {
+            display: grid;
+            gap: 20px; /* Jarak antar kartu */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Kolom responsif */
+            max-width: 1200px; /* Lebar maksimum kontainer */
+            width: 100%;
+            justify-content: center;
+        }
+        .card {
+            background-color: #2d3748; /* Warna latar belakang kartu */
+            border-radius: 1rem; /* Sudut membulat */
+            padding: 1.5rem;
+            text-align: center;
+            color: #e2e8f0; /* Warna teks */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Bayangan */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease-in-out; /* Transisi halus saat hover */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Efek angkat saat hover */
+        }
+        .card-title {
+            font-size: 1.5rem; /* Ukuran judul */
+            font-weight: 600; /* Ketebalan font */
+            margin-bottom: 1rem;
+        }
+        .glow-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem; /* Sudut membulat */
+            font-weight: 700;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Bayangan tombol */
+        }
+
+        /* Efek cahaya untuk setiap tombol */
+        .glow-button.green {
+            background-color: #10b981; /* Hijau */
+            box-shadow: 0 0 15px #10b981;
+        }
+        .glow-button.pink {
+            background-color: #ec4899; /* Merah muda */
+            box-shadow: 0 0 15px #ec4899;
+        }
+        .glow-button.orange {
+            background-color: #f97316; /* Oranye */
+            box-shadow: 0 0 15px #f97316;
+        }
+        .glow-button.blue {
+            background-color: #3b82f6; /* Biru */
+            box-shadow: 0 0 15px #3b82f6;
+        }
+
+        .glow-button:hover {
+            opacity: 0.9;
+            transform: scale(1.05); /* Sedikit membesar saat hover */
+        }
+
+        /* Responsivitas untuk layar kecil */
+        @media (max-width: 640px) {
+            .card-title {
+                font-size: 1.25rem;
+            }
+            .glow-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="card-container">
+    <!-- Kartu Penjumlahan -->
+    <div class="card">
+        <h2 class="card-title">Penjumlahan</h2>
+        <a href="./penjumlahan/index.html" >
+            <button class="glow-button green">Buka</button>
+        </a>
+    </div>
+
+    <!-- Kartu Pengurangan -->
+    <div class="card">
+        <h2 class="card-title">Pengurangan</h2>
+        <a href="./pengurangan/index.html" >
+            <button class="glow-button pink">Buka</button>
+        </a>
+    </div>
+
+    <!-- Kartu Perkalian -->
+    <div class="card">
+        <h2 class="card-title">Perkalian</h2>
+        <a href="./perkalian/index.html" >
+            <button class="glow-button orange">Buka</button>
+        </a>
+    </div>
+
+    <!-- Kartu Pembagian -->
+    <div class="card">
+        <h2 class="card-title">Pembagian</h2>
+        <a href="./pembagian/index.html" >
+            <button class="glow-button blue">Buka</button>
+        </a>
+    </div>
+</div>
+
+ </body>
+</html>

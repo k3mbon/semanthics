@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIMATIKA</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .bg-blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('LATAR3.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px);
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .custom-video {
+    max-width: 540px;     /* Lebar maksimum video */
+    width: 100%;          /* Biar tetap responsif */
+    height: auto;         /* Proporsi tidak rusak */
+    display: block;       /* Biar bisa margin-auto */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1rem;  /* Sudut membulat */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Bayangan */
+}
+  </style>
+
+  
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+  <!-- Background -->
+  <div class="bg-blur"></div>
+  <div class="overlay"></div>
+
+  <!-- Header -->
+  <header class="bg-blue-700 w-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 py-4 shadow-lg rounded-b-3xl z-10">
+    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+      <img src="logo.undiksha.png" alt="logo" class="h-16 w-16 md:h-20 md:w-20 rounded-full shadow-md">
+      <h1 class="text-white text-3xl md:text-4xl font-bold">SIMATIKA</h1>
+    </div>
+    <nav class="flex space-x-4 md:space-x-6 flex-wrap justify-center md:justify-end">
+      <a href="../menu.html" class="text-white text-base md:text-lg font-medium hover:underline">Beranda</a>
+      <a href="#" class="text-white text-base md:text-lg font-medium hover:underline">Materi</a>
+      <a href="#" class="text-white text-base md:text-lg font-medium hover:underline">Latihan</a>
+      <a href="link-target.html">
+  <button class="bg-yellow-400 text-blue-800 px-5 py-2 rounded-full font-semibold shadow hover:bg-yellow-500 transition">
+    Mulai
+  </button>
+</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center p-8 z-10">
+    <div class="bg-gray-900 bg-opacity-70 rounded-2xl p-6 md:p-8 shadow-2xl w-full max-w-4xl flex flex-col items-center">
+      <h2 class="text-white text-2xl font-bold mb-4">Belajar Perkalian</h2>
+        <video id="video" class="custom-video" controls poster="poster.jpg">
+
+          <source src="belajar.perkalian.mp4" type="video/mp4">
+          Browser Anda tidak mendukung pemutaran video.
+        </video>
+      </div>
+    </div>
+  </main>
+
+  <!-- Kotak Terjemah -->
+  <section class="w-full flex justify-center px-4 z-10 mb-6">
+    <div class="bg-white rounded-xl p-6 shadow-lg max-w-2xl w-full text-center">
+      <h2 class="text-xl font-bold text-gray-800 mb-2"></h2>
+      <p id="kotak-terjemah" class="text-gray-700 text-base md:text-lg">
+        Ayo kita belajar anak-anak dengan semangat dan penuh keceriaan!
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto p-4 text-center text-gray-200 text-sm z-10">
+    &copy; 2025 SIMATIKA - All Rights Reserved
+  </footer>
+
+  <!-- JavaScript Subtitle ke Kotak Terjemah -->
+  <script>
+  const video = document.getElementById('video');
+  const kotakTerjemah = document.getElementById('kotak-terjemah');
+
+  const subtitles = [
+    { time: 21, text: "Halo anak-anak." },
+    { time: 26, text: "Bertemu kembali dengan Bapak." },
+    { time: 31, text: "Pertemuan lalu kita sudah belajar." },
+    { time: 38, text: "mengenai penjumlahan dan pengurangan." },
+    { time: 43, text: "Hari ini kita akan belajar." },
+    { time: 49, text: "mengenai perkalian." },
+    { time: 52, text: "Ayo kita simak." },
+    { time: 57, text: "video berikut." },
+    { time: 62, text: "Coba." },
+    { time: 65, text: "Perhatikan gambar ayam ini." },
+    { time: 70, text: "Berapa banyak." },
+    { time: 77, text: "kaki pada satu ekor ayam." },
+    { time: 81, text: "Ayo." },
+    { time: 85, text: "Kita hitung sama-sama." },
+    { time: 92, text: "Iya, benar." },
+    { time: 96, text: "Sebanyak dua kaki ayam." },
+    { time: 101, text: "Yakni." },
+    { time: 106, text: "1 dikali 2 sama dengan 2." },
+    { time: 112, text: "Jadi." },
+    { time: 117, text: "satu ayam memiliki dua kaki." },
+    { time: 126, text: "Selanjutnya." },
+    { time: 130, text: "Coba perhatikan gambar dua ekor ayam berikut ini." },
+    { time: 136, text: "Berapakah." },
+    { time: 140, text: "jumlah kakinya." },
+    { time: 146, text: "Ayo." },
+    { time: 150, text: "Kita hitung sama-sama." },
+    { time: 159, text: "Satu, dua." },
+    { time: 162, text: "Satu, dua." },
+    { time: 166, text: "Iya, benar." },
+    { time: 170, text: "Ada empat kaki ayam." },
+    { time: 175, text: "Adalah 2 dikali 2 sama dengan 2 ditambah 2 sama dengan 4." },
+    { time: 186, text: "Jadi." },
+    { time: 190, text: "jumlah dua kaki ayam sama dengan 4." },
+    { time: 193, text: "Selanjutnya." },
+    { time: 197, text: "Coba perhatikan tiga gambar ayam berikut ini." },
+    { time: 201, text: "Berapakah." },
+    { time: 205, text: "jumlah kakinya." },
+    { time: 208, text: "Ayo." },
+    { time: 212, text: "Kita hitung bersama-sama." },
+    { time: 220, text: "Satu, dua." },
+    { time: 224, text: "Satu, dua." },
+    { time: 228, text: "Satu, dua." },
+    { time: 230, text: "Adalah 3 dikalikan 2 sama dengan 2 ditambah 2 ditambah 2 sama dengan 6." },
+    { time: 242, text: "Jadi." },
+    { time: 247, text: "jumlah tiga kaki ayam tersebut adalah sebanyak 6." },
+    { time: 260, text: "Mari kita coba dengan contoh yang lainnya." },
+    { time: 270, text: "Selanjutnya." },
+    { time: 274, text: "Coba perhatikan." },
+    { time: 284, text: "Satu sisir pisang berikut ini." },
+    { time: 291, text: "Terdapat tiga buah pisang." },
+    { time: 294, text: "Jika dua sisir pisang terdapat enam buah." },
+    { time: 305, text: "Adalah 2 dikali 3 sama dengan 3 ditambah 3 sama dengan 6 buah." },
+    { time: 322, text: "Lalu." },
+    { time: 326, text: "Jika tiga sisir pisang." },
+    { time: 331, text: "Berapakah jumlahnya." },
+    { time: 336, text: "Mari." },
+    { time: 340, text: "Kita hitung bersama-sama." },
+    { time: 347, text: "Tiga sisir pisang." },
+    { time: 352, text: "Adalah 3 dikali 3." },
+    { time: 364, text: "Sama dengan 3 ditambah 3 ditambah 3 sama dengan 9 buah pisang." },
+    { time: 377, text: "Jadi." },
+    { time: 382, text: "jumlah dari tiga sisir pisang tersebut adalah sebanyak 9." },
+    { time: 385, text: "Bagaimana anak-anak?" },
+    { time: 390, text: "Perkalian itu mudah bukan?" },
+    { time: 396, text: "Itu merupakan." },
+    { time: 401, text: "konsep perkalian." },
+    { time: 404, text: "Yuk, tetap semangat belajar." },
+    { time: 409, text: "Ayo." },
+    { time: 412, text: "Selanjutnya kita berlatih." }
+  ];
+
+  video.addEventListener('timeupdate', () => {
+    const currentTime = video.currentTime;
+    for (let i = subtitles.length - 1; i >= 0; i--) {
+      if (currentTime >= subtitles[i].time) {
+        kotakTerjemah.textContent = subtitles[i].text;
+        break;
+      }
+    }
+  });
+</script>
+
+
+
+</body>
+</html>

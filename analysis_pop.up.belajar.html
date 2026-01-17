@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMATIKA</title>
+    <link rel="icon" href="logo.png" type="image/x-icon"> <!-- Ganti 'favicon.ico' dengan lokasi file favicon Anda -->
+    <style>
+    body {
+  background-image: url('latar.png'); /* Ganti dengan path gambar Anda */
+  background-color: green; /* Warna latar belakang jika gambar tidak tersedia */
+  background-size: cover; /* Menyesuaikan ukuran gambar agar menutupi elemen */
+  background-position: center; /* Memposisikan gambar di tengah elemen */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh;
+  font-family: "Open Sans";
+}
+
+.education {
+  --bg-color: #ffd861;
+  --bg-color-light: #ffeeba;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(255, 215, 97, 0.48);
+}
+
+.credentialing {
+  --bg-color: #B8F9D3;
+  --bg-color-light: #e2fced;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(184, 249, 211, 0.48);
+}
+
+.wallet {
+  --bg-color: #CEB2FC;
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
+}
+
+.human-resources {
+  --bg-color: #DCE9FF;
+  --bg-color-light: #f1f7ff;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(220, 233, 255, 0.48);
+}
+
+.card {
+  width: 220px;
+  height: 321px;
+  background: #fff;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+
+.card:hover .overlay {
+  transform: scale(4) translateZ(0);
+}
+
+.card:hover .circle {
+  border-color: var(--bg-color-light);
+  background: var(--bg-color);
+}
+
+.card:hover .circle:after {
+  background: var(--bg-color-light);
+}
+
+.card:hover p {
+  color: var(--text-color-hover);
+}
+
+.card:active {
+  transform: scale(1) translateZ(0);
+  box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+    0 15px 24px var(--box-shadow-color);
+}
+
+.card p {
+  font-size: 17px;
+  color: #4C5656;
+  margin-top: 30px;
+  z-index: 1000;
+  transition: color 0.3s ease-out;
+}
+
+.circle {
+  width: 131px;
+  height: 131px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+}
+
+.circle:after {
+  content: "";
+  width: 118px;
+  height: 118px;
+  display: block;
+  position: absolute;
+  background: var(--bg-color);
+  border-radius: 50%;
+  top: 7px;
+  left: 7px;
+  transition: opacity 0.3s ease-out;
+}
+
+.circle svg {
+  z-index: 10000;
+  transform: translateZ(0);
+}
+
+.overlay {
+  width: 118px;
+  position: absolute; 
+  height: 118px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  top: 70px;
+  left: 50px;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
+}
+    </style>
+
+   <style>
+   @import url(https://fonts.googleapis.com/css?family=Nunito);
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body { 
+  margin:0;
+  padding:0;
+    perspective: 1px;
+    transform-style: preserve-3d;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: Nunito;
+}
+
+h1 {
+   font-size: 250%
+}
+
+p {
+  font-size: 140%;
+  line-height: 150%;
+  color: #333;
+}
+
+
+#title h1 {
+ transform: translateZ(.25px) scale(.75);
+ transform-origin: 50% 100%;
+
+}
+  </style>
+
+</head>
+<body>
+
+    <div id="title" class="slide header">
+    <h1>Ayo Belajar</h1>
+    </div>
+
+<a href="penjumlahan.belajar/index.html" class="card education">
+    <div class="overlay"></div>
+    <div class="circle">
+        <svg width="71px" height="76px" viewBox="0 0 71 76" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35.5" cy="38" r="35.5" fill="#D98A19"/>
+            <line x1="35.5" y1="18" x2="35.5" y2="58" stroke="#FFFFFF" stroke-width="5"/>
+            <line x1="18" y1="38" x2="53" y2="38" stroke="#FFFFFF" stroke-width="5"/>
+        </svg>
+    </div>
+    <p>Penjumlahan</p>
+</a>
+
+<a href="pengurangan.belajar/index.html" class="card credentialing">
+    <div class="overlay"></div>
+    <div class="circle">
+        <svg width="64px" height="72px" viewBox="0 0 64 72" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="36" r="32" fill="#59A785"/>
+            <rect x="14" y="34" width="36" height="4" fill="#FFFFFF"/>
+        </svg>
+    </div>
+    <p>Pengurangan</p>
+</a>
+
+<a href="perkalian.belajar/index.html" class="card wallet">
+    <div class="overlay"></div>
+    <div class="circle">
+        <svg width="78px" height="60px" viewBox="0 0 78 60" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="39" cy="30" r="30" fill="#AC8BE9"/>
+            <line x1="20" y1="20" x2="58" y2="40" stroke="#FFFFFF" stroke-width="6"/>
+            <line x1="20" y1="40" x2="58" y2="20" stroke="#FFFFFF" stroke-width="6"/>
+        </svg>
+    </div>
+    <p>Perkalian</p>
+</a>
+
+<a href="pembagian.belajar/index.html" class="card human-resources">
+    <div class="overlay"></div>
+    <div class="circle">
+        <svg width="66px" height="77px" viewBox="0 0 66 77" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="33" cy="20" r="15" fill="#AFCEFF"/>
+            <circle cx="33" cy="56" r="15" fill="#AFCEFF"/>
+            <rect x="28" y="31" width="10" height="15" fill="#3B6CB7"/>
+        </svg>
+    </div>
+    <p>Pembagian</p>
+</a>
+
+</body>
+</html>

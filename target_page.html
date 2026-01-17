@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIMATIKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png" type="image/x-icon"> <!-- Ganti 'favicon.ico' dengan lokasi file favicon Anda -->
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka One', cursive;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #87CEEB, #add8e6);
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('LATAR2.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    .container > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .header-left {
+      font-size: 4em;
+      color: #fff;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .header-right a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      transition: color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-right a:hover {
+      color: #FFD700;
+    }
+
+    .header-right .button {
+      background-color: #FFD700;
+      color: #333;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.8em;
+      font-weight: bold;
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-right .button:hover {
+      background-color: #e6c200;
+      transform: translateY(-2px);
+    }
+
+    /* Efek overlay tombol */
+    .header-right .button::after,
+    .center-menus a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .header-right .button:hover::after,
+    .center-menus a:hover::after {
+      opacity: 1;
+    }
+
+    .footer-dots {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #fff;
+    }
+
+    .bottom-right-ai {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 1.2em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .center-menus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 40px;
+    }
+
+    .center-menus a {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 30px;
+      font-size: 1.2em;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .center-menus a img {
+      width: 60px;
+      height: 60px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .center-menus a:nth-child(1) {
+      color: #3498db;
+    }
+
+    .center-menus a:nth-child(2) {
+      color: #e67e22;
+    }
+
+    .center-menus a:nth-child(3) {
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-left">SIMATIKA</div>
+      <nav class="header-right">
+        <a href="https://go.undiksha.ac.id/materisimatika">Materi</a>
+        <a href="info.html">Informasi</a>
+        <a href="index.html" class="button">Keluar</a>
+      </nav>
+    </header>
+
+    <div class="footer-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="bottom-right-ai">FIP UNDIKSHA</div>
+  </div>
+
+  <div class="center-menus">
+    <a href="https://go.undiksha.ac.id/panduansimatika">
+      <img src="PANDUAN.png" alt="Panduan">
+      Buku Panduan
+    </a>
+    <a href="pop.up.belajar.html">
+      <img src="AYO.BELAJAR.png" alt="Belajar">
+      Ayo Belajar
+    </a>
+    <a href="pop.up.berlatih.html">
+      <img src="LATIHAN.SOAL.png" alt="Berlatih">
+      Ayo Berlatih
+    </a>
+  </div>
+
+    <!-- Audio Latar Belakang -->
+  <audio id="bg-audio" autoplay loop>
+    <source src="LATAR1.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <script>
+    window.addEventListener('load', () => {
+      const bgAudio = document.getElementById('bg-audio');
+      const naratorAudio = document.getElementById('narator-audio');
+
+      // Atur volume masing-masing audio (0.0 = senyap, 1.0 = maksimum)
+      bgAudio.volume = 0.1;       // Musik latar
+      naratorAudio.volume = 0.9;  // Suara narator
+
+      // Play keduanya, tangani jika autoplay diblokir
+      bgAudio.play().catch(e => console.log('Autoplay musik gagal:', e));
+      naratorAudio.play().catch(e => console.log('Autoplay narator gagal:', e));
+    });
+  </script>
+
+</body>
+</html>
