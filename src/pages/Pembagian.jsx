@@ -150,7 +150,7 @@ const DropZone = ({ id, onDrop, content, className, status }) => {
 
 const PembagianGame = () => {
   useEffect(() => {
-    document.title = 'Pembagian | Simatika';
+    document.title = 'Pembagian | Semanthics';
   }, []);
 
   const [zones, setZones] = useState({

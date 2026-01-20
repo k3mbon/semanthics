@@ -187,7 +187,7 @@ const TrashBin = ({ onDrop }) => {
  */
 const PenguranganGame = () => {
   useEffect(() => {
-    document.title = 'Pengurangan | Simatika';
+    document.title = 'Pengurangan | Semanthics';
   }, []);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);

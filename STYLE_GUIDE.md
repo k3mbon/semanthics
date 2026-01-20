@@ -1,6 +1,6 @@
-# Semanthics Game Style Guide
+# Simatika Game Style Guide
 
-This document outlines the shared design patterns, CSS classes, and structure for the Semanthics math games (Penjumlahan, Pengurangan, Perkalian, Pembagian).
+This document outlines the shared design patterns, CSS classes, and structure for the Simatika math games (Penjumlahan, Pengurangan, Perkalian, Pembagian).
 
 ## Typography
 

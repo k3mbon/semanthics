@@ -150,7 +150,7 @@ const DropZone = ({ id, onDrop, content, className, status }) => {
 
 const PenjumlahanGame = () => {
   useEffect(() => {
-    document.title = 'Penjumlahan | Simatika';
+    document.title = 'Penjumlahan | Semanthics';
   }, []);
 
   const [zones, setZones] = useState({

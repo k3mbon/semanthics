@@ -8,9 +8,8 @@ export default {
     extend: {
       fontFamily: {
         'fredoka': ['"Fredoka One"', 'cursive'],
-        'nunito': ['"Nunito"', 'sans-serif'],
-        'inter': ['"Inter"', 'sans-serif'],
-        'sans': ['"Fredoka One"', 'cursive'],
+        'nunito': ['Nunito', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       colors: {
         'sky-light': '#87CEEB',

@@ -1,0 +1,12 @@
+.not-found-container {
+  /* Additional custom styles if needed beyond Tailwind */
+}
+
+.error-code {
+  font-family: 'Shrikhand', cursive;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}

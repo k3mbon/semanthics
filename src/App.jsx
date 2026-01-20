@@ -8,6 +8,7 @@ import Penjumlahan from './pages/Penjumlahan';
 import Pengurangan from './pages/Pengurangan';
 import Perkalian from './pages/Perkalian';
 import Pembagian from './pages/Pembagian';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/pengurangan" element={<Navigate to="/berlatih/pengurangan" replace />} />
         <Route path="/perkalian" element={<Navigate to="/berlatih/perkalian" replace />} />
         <Route path="/pembagian" element={<Navigate to="/berlatih/pembagian" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -171,7 +171,7 @@ const TrashBin = ({ onDrop }) => {
 
 const PerkalianGame = () => {
   useEffect(() => {
-    document.title = 'Perkalian | Simatika';
+    document.title = 'Perkalian | Semanthics';
   }, []);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);

@@ -70,8 +70,8 @@ const Header = () => {
     return (
         <header className="sticky top-0 left-0 w-full z-50 bg-[#2563EB] shadow-md px-4 md:px-10 py-3 flex justify-between items-center font-fredoka">
             <Link to="/" className="flex items-center gap-4 text-white no-underline">
-                <img src="/logo-simatika.png" alt="Simatika Logo" className="h-10 md:h-12 w-auto object-contain" />
-                <span className="text-2xl md:text-3xl tracking-wide">SIMATIKA</span>
+                <img src="/Semanthics_Logo.png" alt="Simatika Logo" className="h-10 md:h-12 w-auto object-contain" />
+                <span className="text-2xl md:text-3xl tracking-wide font-fredoka" style={{ fontWeight: 700, fontStyle: "normal" }}>SIMATIKA</span>
             </Link>
 
             {/* Mobile Menu Button */}

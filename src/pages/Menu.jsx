@@ -26,12 +26,12 @@ export default function Menu() {
         {/* Header */}
         <header className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4 justify-center md:justify-start">
-             <img src="/logo-simatika.png" alt="Simatika Logo" className="h-12 md:h-20 w-auto object-contain drop-shadow-md" />
-             <div className="text-4xl md:text-6xl text-white tracking-widest drop-shadow-md text-center md:text-left" style={{ letterSpacing: "-1px", textShadow: '3px 3px 6px rgba(0, 0, 0, 0.3)' }}>
+             <img src="/Semanthics_Logo.png" alt="Simatika Logo" className="h-12 md:h-20 w-auto object-contain drop-shadow-md" />
+             <div className="text-4xl md:text-6xl text-white tracking-widest drop-shadow-md text-center md:text-left font-fredoka" style={{ letterSpacing: "-1px", textShadow: '3px 3px 6px rgba(0, 0, 0, 0.3)', fontWeight: 700, fontStyle: "normal" }}>
                SIMATIKA
              </div>
           </div>
-          <nav className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+          <nav className="flex flex-wrap justify-center items-center gap-4 md:gap-8 font-fredoka">
             <a 
               href="https://go.undiksha.ac.id/materisimatika" 
               className="text-white text-xl md:text-3xl no-underline hover:text-yellow-400 transition-colors duration-300 relative overflow-hidden"

@@ -28,10 +28,10 @@ describe('Belajar Layout', () => {
     expect(header).toHaveClass('z-50');
 
     // Check Branding
-    expect(screen.getByText('SIMATIKA')).toBeInTheDocument();
-    const logo = screen.getByAltText('Simatika Logo');
+    expect(screen.getByText('SEMANTHICS')).toBeInTheDocument();
+    const logo = screen.getByAltText('Semanthics Logo');
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute('src', '/logo-simatika.png');
+    expect(logo).toHaveAttribute('src', '/Semanthics_Logo.png');
   });
 
   it('renders content with flex-1 for responsive filling', () => {
