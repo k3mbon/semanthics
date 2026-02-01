@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Link } from 'react-router-dom';
 import './Perkalian.css';
+import SuccessFeedback from '../components/SuccessFeedback';
 
 const ItemTypes = {
   NUMBER: 'number',
@@ -21,11 +22,11 @@ const playSound = (type) => {
 };
 
 const soals = [
-  { text: "Soal 1:\nIbu membeli 3 keranjang apel. Setiap keranjang berisi 5 apel.\nBerapa jumlah seluruh apel ibu?", answer: 15, op1: 3, op2: 5, operator: 'x' },
-  { text: "Soal 2:\nAda 4 mobil parkir. Setiap mobil memiliki 4 roda.\nBerapa jumlah seluruh roda mobil itu?", answer: 16, op1: 4, op2: 4, operator: 'x' },
-  { text: "Soal 3:\nAyah menanam 6 baris jagung. Setiap baris ada 5 pohon.\nBerapa jumlah seluruh pohon jagung?", answer: 30, op1: 6, op2: 5, operator: 'x' },
-  { text: "Soal 4:\nDi kelas ada 5 meja. Setiap meja dikelilingi 2 kursi.\nBerapa jumlah seluruh kursi di kelas?", answer: 10, op1: 5, op2: 2, operator: 'x' },
-  { text: "Soal 5:\nKakak membeli 7 kotak pensil. Setiap kotak berisi 3 pensil.\nBerapa jumlah seluruh pensil kakak?", answer: 21, op1: 7, op2: 3, operator: 'x' }
+  { text: "Soal 1:\nIbu membeli 3 keranjang mangga. Setiap keranjang berisi 5 mangga.\nBerapa jumlah seluruh mangga?", answer: 15, op1: 3, op2: 5, operator: 'x' },
+  { text: "Soal 2:\nAda 4 kotak bola. Setiap kotak berisi 4 bola.\nBerapa jumlah seluruh bola?", answer: 16, op1: 4, op2: 4, operator: 'x' },
+  { text: "Soal 3:\nAyah menanam 6 baris pohon kelapa. Setiap baris ada 5 pohon.\nBerapa jumlah seluruh pohon kelapa?", answer: 30, op1: 6, op2: 5, operator: 'x' },
+  { text: "Soal 4:\nDi meja ada 5 piring. Setiap piring berisi 2 kue.\nBerapa jumlah seluruh kue?", answer: 10, op1: 5, op2: 2, operator: 'x' },
+  { text: "Soal 5:\nPaman punya 7 kandang ayam. Setiap kandang berisi 3 ayam.\nBerapa jumlah seluruh ayam?", answer: 21, op1: 7, op2: 3, operator: 'x' }
 ];
 
 const DraggableGridItem = ({ img, type, fromId }) => {
@@ -180,6 +181,7 @@ const PerkalianGame = () => {
   const [validation, setValidation] = useState({});
   const [popup, setPopup] = useState({ show: false, message: '', type: 'text', imageSrc: '' });
   const [showFaq, setShowFaq] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const question = soals[currentQuestion];
 
@@ -192,6 +194,7 @@ const PerkalianGame = () => {
     setGrids(newGrids);
     setZones({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
     setValidation({});
+    setShowSuccess(false);
   }, [currentQuestion]);
 
   const removeItem = (origin, id) => {
@@ -298,6 +301,7 @@ const PerkalianGame = () => {
 
     if (isZone1Correct && isZone3Correct && isZone5Correct && isOpCorrect && isEqCorrect && allGridsCorrect) {
         playSound('correct');
+        setShowSuccess(true);
         setPopup({ show: true, message: 'Hebat! Jawabanmu Benar! 🎉', type: 'success' });
     } else {
         playSound('wrong');
@@ -437,6 +441,7 @@ const PerkalianGame = () => {
         )}
 
         {/* Result Popup */}
+        <SuccessFeedback show={showSuccess} />
         {popup.show && (
             <div className="popup-overlay">
                 <div className="popup-content">

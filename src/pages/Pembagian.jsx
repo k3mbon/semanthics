@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Link } from 'react-router-dom';
 import './Pembagian.css';
+import SuccessFeedback from '../components/SuccessFeedback';
 
 const ItemTypes = {
   NUMBER: 'number',
@@ -20,6 +21,7 @@ const soals = [
   { text: "Soal 2:\nIbu punya 12 kue. Kue tersebut dimasukkan ke dalam 3 piring sama rata.\nBerapa isi kue di setiap piring?", answer: 4, op1: 12, op2: 3, operator: ':' },
   { text: "Soal 3:\n10 buah mangga dibagikan kepada 5 orang teman.\nBerapa mangga yang diterima setiap teman?", answer: 2, op1: 10, op2: 5, operator: ':' },
   { text: "Soal 4:\nAyah membawa 6 kelapa. Kelapa itu diberikan kepada 3 tetangga.\nBerapa kelapa yang diterima satu tetangga?", answer: 2, op1: 6, op2: 3, operator: ':' },
+  { text: "Soal 5:\nAda 10 ayam yang dimasukkan ke dalam 2 kandang sama banyak.\nBerapa ayam di setiap kandang?", answer: 5, op1: 10, op2: 2, operator: ':' }
 ];
 
 const DraggableGridItem = ({ img, type, fromId }) => {
@@ -289,6 +291,7 @@ const PembagianGame = () => {
 
      if (isZone1Correct && isZone2Correct && isZone3Correct && isZone4Correct && isZone5Correct && allGridsCorrect) {
          playSound('success');
+         setShowSuccess(true);
          setPopup({ show: true, message: 'Benar! Luar biasa!', type: 'text' });
      } else {
          playSound('error');

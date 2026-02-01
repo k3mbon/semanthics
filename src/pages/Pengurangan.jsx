@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Link } from 'react-router-dom';
 import { validateSubtraction } from '../utils/mathOperations';
 import './Pengurangan.css';
+import SuccessFeedback from '../components/SuccessFeedback';
 
 /**
  * Item types for Drag and Drop functionality
@@ -430,6 +431,7 @@ const PenguranganGame = () => {
       </div>
 
       {/* Popups */}
+      <SuccessFeedback show={showSuccess} />
       {popup.show && (
         <div className="popup-overlay">
            <div className="popup-content">

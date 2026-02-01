@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const [password, setPassword] = useState('');
@@ -8,15 +8,24 @@ const Login = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
+    document.title = 'Login | Simatika';
     if (audioRef.current) {
-        audioRef.current.volume = 0.1;
-        audioRef.current.play().catch(e => console.log("Autoplay blocked:", e));
+        audioRef.current.volume = 0.3;
+        const playAudio = async () => {
+            try {
+                await audioRef.current.play();
+            } catch (e) {
+                console.log("Autoplay blocked:", e);
+            }
+        };
+        playAudio();
     }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === "12345678") {
+      localStorage.setItem('username', username);
       navigate('/');
     } else {
       alert("Kata rahasia salah! Coba lagi ya.");
@@ -24,76 +33,108 @@ const Login = () => {
   };
 
   return (
-    <div className="relative w-screen min-h-dvh flex flex-col items-center justify-center overflow-hidden font-fredoka py-10">
-      {/* Background with Overlay */}
-       <div 
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('/LATAR1.png')` 
-        }}
-      />
-      <div className="fixed inset-0 bg-black/30 z-0"></div>
+    <div className="relative w-screen h-dvh flex flex-col items-center justify-center overflow-hidden font-nunito bg-cover bg-center"
+         style={{ backgroundImage: "url('/LATAR2.png')" }}>
+      
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px]"></div>
 
       {/* Login Container */}
-      <div className="relative z-10 p-8 bg-white/90 rounded-2xl shadow-2xl max-w-sm w-full transition-transform duration-300 hover:scale-105 mx-4">
-        <h2 className="text-4xl font-bold text-center mb-6 text-[#0aa5ff]" style={{ textShadow: '1px 1px #ffd700' }}>🎮 Ayo Masuk!</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-5">
-            <label htmlFor="username" className="block text-sm font-medium mb-1 text-gray-700">🧒 Nama Kamu</label>
+      <div className="relative z-10 w-[90%] max-w-md bg-white/95 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-4 border-white/50 animate-fade-in mx-4">
+        
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-[#0aa5ff] font-fredoka flex items-center justify-center gap-3 drop-shadow-sm"
+            style={{ textShadow: '2px 2px 0px #FFD700' }}>
+          <span>🎮</span> Ayo Masuk!
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Username Input */}
+          <div>
+            <label htmlFor="username" className="block text-gray-700 font-bold mb-2 flex items-center gap-2 text-lg">
+              <span className="text-xl">🧒</span> Nama Kamu
+            </label>
             <input 
               type="text" 
               id="username" 
               placeholder="Contoh: Budi123"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition duration-200 ease-in-out"
+              className="w-full px-5 py-3 rounded-xl border-2 border-gray-200 focus:border-[#0aa5ff] focus:ring-4 focus:ring-[#0aa5ff]/20 outline-none transition-all text-gray-700 font-medium text-lg placeholder-gray-400 bg-gray-50/50"
+              required
             />
           </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-700">🔒 Kata Rahasia</label>
+
+          {/* Password Input */}
+          <div>
+            <label htmlFor="password" className="block text-gray-700 font-bold mb-2 flex items-center gap-2 text-lg">
+              <span className="text-xl">🔒</span> Kata Rahasia
+            </label>
             <input 
               type="password" 
               id="password" 
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition duration-200 ease-in-out"
+              className="w-full px-5 py-3 rounded-xl border-2 border-gray-200 focus:border-[#0aa5ff] focus:ring-4 focus:ring-[#0aa5ff]/20 outline-none transition-all text-gray-700 font-medium text-lg placeholder-gray-400 bg-gray-50/50"
+              required
             />
           </div>
+
+          {/* Submit Button */}
           <button 
             type="submit"
-            className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-xl w-full transform transition duration-300 hover:scale-105 shadow-lg"
+            className="w-full bg-[#EC4899] hover:bg-[#DB2777] text-white font-bold py-4 rounded-xl text-lg shadow-[0_4px_0_#9D174D] active:shadow-none active:translate-y-[4px] transition-all duration-200 flex items-center justify-center gap-2 mt-4 group"
           >
-            🚀 Masuk Sekarang
+            <span className="group-hover:rotate-12 transition-transform duration-300">🚀</span> Masuk Sekarang
           </button>
         </form>
-        <p className="text-center text-gray-600 text-sm mt-5">
+
+        {/* Footer Link */}
+        <p className="text-center text-gray-600 mt-8 font-bold">
           Kamu Perlu Panduan? 
-          <a href="https://go.undiksha.ac.id/panduansimatika" className="text-pink-500 hover:text-pink-700 font-semibold ml-1"> Panduan!</a>
+          <Link to="/panduan" className="text-[#EC4899] hover:text-[#DB2777] ml-1 hover:underline transition-colors">
+            Panduan!
+          </Link>
         </p>
       </div>
 
-      {/* Mascot */}
-      <img src="/KARAKTER1.png" alt="Maskot" className="fixed bottom-[-2px] right-[5px] w-[150px] md:w-[200px] z-[1001] animate-bounce-float hidden md:block" style={{ animation: 'bounceIn 1.5s ease-out forwards, float 3s ease-in-out infinite' }} />
-      <div className="fixed bottom-[200px] md:bottom-[300px] right-[25px] bg-white/85 text-black px-4 py-2 rounded-2xl font-fredoka text-base z-[1002] shadow-md animate-bounce-in hidden md:block">
+      {/* Mascot Character */}
+      <img 
+        src="/KARAKTER1.png" 
+        alt="Karakter Simatika" 
+        className="fixed bottom-0 right-0 w-32 md:w-48 lg:w-64 drop-shadow-2xl z-20 pointer-events-none transition-transform hover:scale-105"
+      />
+
+      {/* Speech Bubble */}
+      <div className="fixed bottom-[140px] right-[20px] md:bottom-[200px] md:right-[180px] lg:bottom-[280px] lg:right-[220px] bg-white text-black px-6 py-4 rounded-2xl rounded-tr-none font-bold text-sm md:text-base shadow-xl z-30 animate-bounce-in max-w-[200px] md:max-w-xs text-center border-2 border-gray-100 transform rotate-[-2deg]">
         "Ayo, minta guru masukkan sandinya dulu."
+        <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-white transform rotate-45 border-r-2 border-b-2 border-gray-100 hidden"></div>
       </div>
 
-       <audio ref={audioRef} autoPlay loop>
+      {/* Background Audio */}
+      <audio ref={audioRef} loop>
         <source src="/LATAR1.mp3" type="audio/mpeg" />
+        Browser kamu tidak mendukung elemen audio.
       </audio>
-      
+
       <style>{`
-        @keyframes bounceIn {
-          0% { transform: scale(0.5) translateY(200px); opacity: 0; }
-          60% { transform: scale(1.1) translateY(-20px); opacity: 1; }
-          80% { transform: scale(0.95) translateY(10px); }
-          100% { transform: scale(1) translateY(0); }
+        @keyframes bounce-in {
+          0% { opacity: 0; transform: scale(0.3) translateY(100px); }
+          50% { opacity: 1; transform: scale(1.05) translateY(-10px); }
+          70% { transform: scale(0.9) translateY(5px); }
+          100% { transform: scale(1) translateY(0) rotate(-2deg); }
         }
-        @keyframes float {
-          0%   { transform: translateY(0px); }
-          50%  { transform: translateY(-15px); }
-          100% { transform: translateY(0px); }
+        .animate-bounce-in {
+          animation: bounce-in 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+          animation-delay: 0.5s;
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>

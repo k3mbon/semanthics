@@ -1,8 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Menu() {
   const audioRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    navigate('/login');
+  };
 
   useEffect(() => {
     if (audioRef.current) {
@@ -46,27 +52,27 @@ export default function Menu() {
             >
               Informasi
             </Link>
-            <Link 
-              to="/login" 
-              className="bg-yellow-400 text-gray-800 px-4 py-2 md:px-6 md:py-3 rounded-full text-xl md:text-3xl font-bold shadow-lg hover:bg-yellow-500 transform hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden flex items-center justify-center"
+            <button 
+              onClick={handleLogout}
+              className="bg-yellow-400 text-gray-800 px-4 py-2 md:px-6 md:py-3 rounded-full text-xl md:text-3xl font-bold shadow-lg hover:bg-yellow-500 transform hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden flex items-center justify-center cursor-pointer border-none"
               style={{ boxShadow: '3px 3px 8px rgba(0, 0, 0, 0.3)' }}
             >
               Keluar
-            </Link>
+            </button>
           </nav>
         </header>
 
         {/* Center Menus */}
         <div className="flex-grow flex items-center justify-center">
           <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center max-h-full overflow-y-auto p-4">
-            <a 
-              href="https://go.undiksha.ac.id/panduansimatika"
+            <Link 
+              to="/panduan"
               className="bg-white rounded-3xl px-6 py-6 md:px-8 md:py-10 text-lg md:text-xl font-medium no-underline shadow-xl hover:scale-105 transition-transform duration-200 relative overflow-hidden flex flex-col items-center text-blue-500 w-48 md:w-auto"
               style={{ boxShadow: '0 6px 24px rgba(0, 0, 0, 0.15)' }}
             >
                <img src="/PANDUAN.png" alt="Panduan" className="w-12 h-12 md:w-16 md:h-16 block mb-2 mx-auto" />
                Buku Panduan
-            </a>
+            </Link>
             <Link 
               to="/belajar"
               className="bg-white rounded-3xl px-6 py-6 md:px-8 md:py-10 text-lg md:text-xl font-medium no-underline shadow-xl hover:scale-105 transition-transform duration-200 relative overflow-hidden flex flex-col items-center text-orange-500 w-48 md:w-auto"

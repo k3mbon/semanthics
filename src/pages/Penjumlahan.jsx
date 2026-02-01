@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Link } from 'react-router-dom';
 import './Penjumlahan.css';
+import SuccessFeedback from '../components/SuccessFeedback';
 
 const ItemTypes = {
   NUMBER: 'number',
@@ -20,6 +21,9 @@ const playSound = (type) => {
 const soals = [
   { text: "Soal 1:\nAni memiliki 5 buah mangga. Lalu, ibu membelikan 3 buah mangga lagi.\nBerapa jumlah mangga yang dimiliki Ani sekarang?", answer: 8, op1: 5, op2: 3, operator: '+' },
   { text: "Soal 2:\nBudi memiliki 7 bola. Ia mendapat 5 bola lagi dari temannya.\nBerapa jumlah bola yang dimiliki Budi sekarang?", answer: 12, op1: 7, op2: 5, operator: '+' },
+  { text: "Soal 3:\nIbu membuat 4 kue. Lalu kakak membawa 4 kue lagi.\nBerapa jumlah kue sekarang?", answer: 8, op1: 4, op2: 4, operator: '+' },
+  { text: "Soal 4:\nPak tani memetik 6 kelapa. Kemudian ia memetik 3 kelapa lagi.\nBerapa jumlah kelapa sekarang?", answer: 9, op1: 6, op2: 3, operator: '+' },
+  { text: "Soal 5:\nDi kandang ada 5 ayam. Paman membeli 5 ayam lagi.\nBerapa jumlah ayam sekarang?", answer: 10, op1: 5, op2: 5, operator: '+' }
 ];
 
 const DraggableGridItem = ({ img, type, fromId }) => {
@@ -166,12 +170,14 @@ const PenjumlahanGame = () => {
   const [popup, setPopup] = useState({ show: false, message: '', type: 'text', imageSrc: '' });
   const [showFaq, setShowFaq] = useState(false);
   const [validation, setValidation] = useState({});
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
       setZones({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
       setGrids({ group1: Array(10).fill(null), group2: Array(10).fill(null) });
       setValidation({});
       setPopup({ show: false, message: '', type: 'text', imageSrc: '' });
+      setShowSuccess(false);
   }, [currentQuestion]);
 
   const removeItem = (origin, id) => {
@@ -274,7 +280,8 @@ const PenjumlahanGame = () => {
      if (isZone1Correct && isZone3Correct && isZone5Correct && 
          isGroup1Correct && isGroup2Correct) {
          playSound('success');
-         setPopup({ show: true, message: 'Benar! Luar biasa!', type: 'text' });
+         setShowSuccess(true);
+         setPopup({ show: true, message: 'Benar! Luar biasa!', type: 'success' });
      } else {
          playSound('error');
          let msg = 'Masih ada yang salah, ayo coba lagi!';
@@ -357,6 +364,7 @@ const PenjumlahanGame = () => {
       </div>
 
       {/* Popups */}
+      <SuccessFeedback show={showSuccess} />
       {popup.show && (
         <div className="popup-overlay">
            <div className="popup-content">

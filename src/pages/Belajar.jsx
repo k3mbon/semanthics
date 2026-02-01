@@ -117,12 +117,24 @@ const Header = () => {
 // Component for Topic Selection (The Cards)
 const TopicSelection = () => {
   return (
-    <div className="h-dvh w-full overflow-y-auto overflow-x-hidden bg-gray-50 font-nunito bg-fixed flex flex-col"
-         style={{ backgroundImage: "url('/latar.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="h-dvh w-full overflow-hidden bg-gray-50 font-nunito flex flex-col relative">
+      {/* Blurred Background Layer */}
+      <div 
+        className="absolute inset-0 z-0" 
+        style={{ 
+          backgroundImage: "url('/latar.png')", 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
+          filter: 'blur(8px)',
+          transform: 'scale(1.05)' // Scale up slightly to avoid white edges from blur
+        }} 
+      />
       
-      <Header />
+      {/* Content Layer */}
+      <div className="relative z-10 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col">
+        <Header />
 
-      <div className="flex-1 w-full flex flex-col items-center justify-center py-10 px-4">
+        <div className="flex-1 w-full flex flex-col items-center justify-center py-10 px-4">
           <div className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-10">
             {/* Left Side Text */}
             <div className="md:w-1/4 text-center md:text-left mb-8 md:mb-0">
@@ -195,6 +207,7 @@ const TopicSelection = () => {
                     </Link>
                 </div>
           </div>
+      </div>
       </div>
     </div>
   );
