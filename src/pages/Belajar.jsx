@@ -8,7 +8,7 @@ const topics = {
   penjumlahan: {
     id: 'penjumlahan',
     title: 'Belajar Penjumlahan',
-    video: '/penjumlahan.belajar/2 Penjumlahan.mp4',
+    video: '/penjumlahan.belajar/1 Penjumlahan - Compressed.mp4',
     poster: '/penjumlahan.belajar/2 Penjumlahan-Cover.jpg',
     gameLink: '/penjumlahan',
     theme: 'yellow',
@@ -22,7 +22,7 @@ const topics = {
   pengurangan: {
     id: 'pengurangan',
     title: 'Belajar Pengurangan',
-    video: '/pengurangan.belajar/3 Pengurangan.mp4',
+    video: '/pengurangan.belajar/2 Pengurangan - Compressed.mp4',
     poster: '/pengurangan.belajar/3 Pengurangan-Cover.jpg',
     gameLink: '/pengurangan',
     theme: 'green',
@@ -36,7 +36,7 @@ const topics = {
   perkalian: {
     id: 'perkalian',
     title: 'Belajar Perkalian',
-    video: '/perkalian.belajar/4 Perkalian.mp4',
+    video: '/perkalian.belajar/3 Perkalian - Compressed.mp4',
     poster: '/perkalian.belajar/4 Perkalian-Cover.jpg',
     gameLink: '/perkalian',
     theme: 'purple',
@@ -50,7 +50,7 @@ const topics = {
   pembagian: {
     id: 'pembagian',
     title: 'Belajar Pembagian',
-    video: '/pembagian.belajar/5 Pembagian.mp4',
+    video: '/pembagian.belajar/4 Pembagian - Compressed.mp4',
     poster: '/pembagian.belajar/5 Pembagian-Cover.jpg',
     gameLink: '/pembagian',
     theme: 'blue',

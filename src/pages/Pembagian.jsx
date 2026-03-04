@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Pembagian.css';
 import SuccessFeedback from '../components/SuccessFeedback';
 
@@ -17,8 +17,8 @@ const playSound = (type) => {
 };
 
 const soals = [
-  { text: "Soal 1:\nAda 8 bola yang akan dibagikan kepada 2 anak sama banyak.\nBerapa bola yang didapat setiap anak?", answer: 4, op1: 8, op2: 2, operator: ':' },
-  { text: "Soal 2:\nIbu punya 12 kue. Kue tersebut dimasukkan ke dalam 3 piring sama rata.\nBerapa isi kue di setiap piring?", answer: 4, op1: 12, op2: 3, operator: ':' },
+  { text: "Soal 1:\nAda 8 kunyit yang akan dibagikan kepada 2 anak sama banyak.\nBerapa kunyit yang didapat setiap anak?", answer: 4, op1: 8, op2: 2, operator: ':' },
+  { text: "Soal 2:\nIbu punya 12 singkong. Singkong tersebut dimasukkan ke dalam 3 piring sama rata.\nBerapa isi singkong di setiap piring?", answer: 4, op1: 12, op2: 3, operator: ':' },
   { text: "Soal 3:\n10 buah mangga dibagikan kepada 5 orang teman.\nBerapa mangga yang diterima setiap teman?", answer: 2, op1: 10, op2: 5, operator: ':' },
   { text: "Soal 4:\nAyah membawa 6 kelapa. Kelapa itu diberikan kepada 3 tetangga.\nBerapa kelapa yang diterima satu tetangga?", answer: 2, op1: 6, op2: 3, operator: ':' },
   { text: "Soal 5:\nAda 10 ayam yang dimasukkan ke dalam 2 kandang sama banyak.\nBerapa ayam di setiap kandang?", answer: 5, op1: 10, op2: 2, operator: ':' }
@@ -151,9 +151,24 @@ const DropZone = ({ id, onDrop, content, className, status }) => {
 };
 
 const PembagianGame = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = 'Pembagian | Semanthics';
-  }, []);
+
+    // Access Control Check
+    const penjumlahanCompleted = JSON.parse(localStorage.getItem('penjumlahan_completed') || '[]');
+    const penguranganCompleted = JSON.parse(localStorage.getItem('pengurangan_completed') || '[]');
+    const TOTAL_QUESTIONS = 5;
+    
+    const isPenjumlahanDone = penjumlahanCompleted.length === TOTAL_QUESTIONS;
+    const isPenguranganDone = penguranganCompleted.length === TOTAL_QUESTIONS;
+
+    if (!isPenjumlahanDone || !isPenguranganDone) {
+      alert("Maaf, kamu harus menyelesaikan semua soal Penjumlahan dan Pengurangan terlebih dahulu!");
+      navigate('/berlatih');
+    }
+  }, [navigate]);
 
   const [zones, setZones] = useState({
     zone1: null, zone2: null, zone3: null, zone4: null, zone5: null,
@@ -326,7 +341,7 @@ const PembagianGame = () => {
       <div className="main-layout">
           {/* Sidebar */}
           <div className="sidebar">
-              {['MANGGA', 'BOLA', 'KUE', 'KELAPA', 'AYAM'].map(item => (
+              {['MANGGA', 'KUNYIT', 'SINGKONG', 'KELAPA', 'AYAM'].map(item => (
                   <DraggableIcon key={item} type={item} img={`/assets/${item}.png`} />
               ))}
           </div>

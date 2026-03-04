@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Perkalian.css';
 import SuccessFeedback from '../components/SuccessFeedback';
 
@@ -23,9 +23,9 @@ const playSound = (type) => {
 
 const soals = [
   { text: "Soal 1:\nIbu membeli 3 keranjang mangga. Setiap keranjang berisi 5 mangga.\nBerapa jumlah seluruh mangga?", answer: 15, op1: 3, op2: 5, operator: 'x' },
-  { text: "Soal 2:\nAda 4 kotak bola. Setiap kotak berisi 4 bola.\nBerapa jumlah seluruh bola?", answer: 16, op1: 4, op2: 4, operator: 'x' },
+  { text: "Soal 2:\nAda 4 kotak kunyit. Setiap kotak berisi 4 kunyit.\nBerapa jumlah seluruh kunyit?", answer: 16, op1: 4, op2: 4, operator: 'x' },
   { text: "Soal 3:\nAyah menanam 6 baris pohon kelapa. Setiap baris ada 5 pohon.\nBerapa jumlah seluruh pohon kelapa?", answer: 30, op1: 6, op2: 5, operator: 'x' },
-  { text: "Soal 4:\nDi meja ada 5 piring. Setiap piring berisi 2 kue.\nBerapa jumlah seluruh kue?", answer: 10, op1: 5, op2: 2, operator: 'x' },
+  { text: "Soal 4:\nDi meja ada 5 piring. Setiap piring berisi 2 singkong.\nBerapa jumlah seluruh singkong?", answer: 10, op1: 5, op2: 2, operator: 'x' },
   { text: "Soal 5:\nPaman punya 7 kandang ayam. Setiap kandang berisi 3 ayam.\nBerapa jumlah seluruh ayam?", answer: 21, op1: 7, op2: 3, operator: 'x' }
 ];
 
@@ -171,9 +171,24 @@ const TrashBin = ({ onDrop }) => {
 };
 
 const PerkalianGame = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = 'Perkalian | Semanthics';
-  }, []);
+
+    // Access Control Check
+    const penjumlahanCompleted = JSON.parse(localStorage.getItem('penjumlahan_completed') || '[]');
+    const penguranganCompleted = JSON.parse(localStorage.getItem('pengurangan_completed') || '[]');
+    const TOTAL_QUESTIONS = 5; 
+    
+    const isPenjumlahanDone = penjumlahanCompleted.length === TOTAL_QUESTIONS;
+    const isPenguranganDone = penguranganCompleted.length === TOTAL_QUESTIONS;
+
+    if (!isPenjumlahanDone || !isPenguranganDone) {
+      alert("Maaf, kamu harus menyelesaikan semua soal Penjumlahan dan Pengurangan terlebih dahulu!");
+      navigate('/berlatih');
+    }
+  }, [navigate]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [zones, setZones] = useState({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
@@ -335,9 +350,9 @@ const PerkalianGame = () => {
   };
 
   const helperImages = [
-    { name: 'BOLA', image: '/assets/BOLA.png' },
+    { name: 'KUNYIT', image: '/assets/KUNYIT.png' },
     { name: 'KELAPA', image: '/assets/KELAPA.png' },
-    { name: 'KUE', image: '/assets/KUE.png' },
+    { name: 'SINGKONG', image: '/assets/SINGKONG.png' },
     { name: 'MANGGA', image: '/assets/MANGGA.png' },
     { name: 'AYAM', image: '/assets/AYAM.png' },
   ];

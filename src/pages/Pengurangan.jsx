@@ -28,10 +28,10 @@ const playSound = (type) => {
 };
 
 const soals = [
-  { text: "Soal 1:\nDoni memiliki 10 bola. Ia memberikan 4 bola kepada temannya.\nBerapa bola yang masih dimiliki Doni?", answer: 6, op1: 10, op2: 4, operator: '-' },
+  { text: "Soal 1:\nDoni memiliki 10 kunyit. Ia memberikan 4 kunyit kepada temannya.\nBerapa kunyit yang masih dimiliki Doni?", answer: 6, op1: 10, op2: 4, operator: '-' },
   { text: "Soal 2:\nSeorang peternak memiliki 8 ayam. Ia menjual 3 ayam ke pasar.\nBerapa ayam yang masih ada di kandang?", answer: 5, op1: 8, op2: 3, operator: '-' }, // Adjusted to < 10 for better visual fit with reference
   { text: "Soal 3:\nWayan memetik 9 kelapa dari pohon. Ia membagikan 5 kelapa kepada tetangganya.\nBerapa kelapa yang masih dimilikinya?", answer: 4, op1: 9, op2: 5, operator: '-' }, // Adjusted
-  { text: "Soal 4:\nIbu membuat 10 kue. 7 kue diberikan ke tamu.\nBerapa kue yang masih tersisa di meja?", answer: 3, op1: 10, op2: 7, operator: '-' }, // Adjusted
+  { text: "Soal 4:\nIbu membuat 10 singkong. 7 singkong diberikan ke tamu.\nBerapa singkong yang masih tersisa di meja?", answer: 3, op1: 10, op2: 7, operator: '-' }, // Adjusted
   { text: "Soal 5:\nMade membawa 7 mangga ke pasar. Ia berhasil menjual 2 mangga.\nBerapa mangga yang belum terjual?", answer: 5, op1: 7, op2: 2, operator: '-' } // Adjusted
 ];
 
@@ -208,6 +208,7 @@ const PenguranganGame = () => {
 
   const [popup, setPopup] = useState({ show: false, message: '', type: 'text', imageSrc: '' });
   const [showFaq, setShowFaq] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [validation, setValidation] = useState({});
 
   useEffect(() => {
@@ -327,6 +328,14 @@ const PenguranganGame = () => {
      if (isZone1Correct && isZone3Correct && isZone5Correct && 
          isGroup1Correct && isGroup2Correct) {
          playSound('success');
+
+         // Save progress to localStorage
+         const completedSoals = JSON.parse(localStorage.getItem('pengurangan_completed') || '[]');
+         if (!completedSoals.includes(currentQuestion)) {
+             completedSoals.push(currentQuestion);
+             localStorage.setItem('pengurangan_completed', JSON.stringify(completedSoals));
+         }
+
          setPopup({ show: true, message: 'Benar! Luar biasa! 🎉', type: 'success' });
      } else {
          playSound('error');
@@ -377,7 +386,7 @@ const PenguranganGame = () => {
       <div className="main-layout">
           {/* Sidebar */}
           <div className="sidebar">
-              {['MANGGA', 'BOLA', 'KUE', 'KELAPA', 'AYAM'].map(item => (
+              {['MANGGA', 'KUNYIT', 'SINGKONG', 'KELAPA', 'AYAM'].map(item => (
                   <DraggableIcon key={item} type={item} img={`/pengurangan/assets/${item}.png`} />
               ))}
           </div>
