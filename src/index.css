@@ -8,3 +8,17 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Drag and Drop Touch Fixes */
+.sidebar-icon,
+.grid-item-img,
+.draggable-number,
+.operator-btn,
+.grid-slot,
+.dropzone,
+.trash-bin {
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}

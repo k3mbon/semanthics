@@ -138,8 +138,13 @@ const TopicSelection = () => {
           <div className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-10">
             {/* Left Side Text */}
             <div className="md:w-1/4 text-center md:text-left mb-8 md:mb-0">
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-800 drop-shadow-sm font-fredoka">Ayo Belajar</h1>
-                <p className="mt-4 text-gray-600 text-lg hidden md:block">Pilih materi yang ingin kamu pelajari hari ini!</p>
+                <h1 className="text-4xl md:text-6xl font-bold text-gray-800 drop-shadow-sm font-fredoka">Tujuan Pembelajaran</h1>
+                <p className="mt-4 text-gray-600 text-lg hidden md:block text-justify leading-relaxed">
+                    <b>Penjumlahan:</b> Siswa menentukan hasil operasi penjumlahan bilangan cacah <br/>
+                    <b>Pengurangan:</b> Siswa menentukan hasil operasi pengurangan bilangan cacah <br/>
+                    <b>Perkalian:</b> Siswa menentukan hasil operasi perkalian bilangan cacah <br/>
+                    <b>Pembagian:</b> Siswa menentukan hasil operasi pembagian bilangan cacah
+                </p>
             </div>
 
                 {/* Cards Grid */}

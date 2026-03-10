@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import { Link, useNavigate } from 'react-router-dom';
 import './Pembagian.css';
 import SuccessFeedback from '../components/SuccessFeedback';
+import { CustomDragLayer } from '../components/CustomDragLayer';
 
 const ItemTypes = {
   NUMBER: 'number',
@@ -17,11 +18,11 @@ const playSound = (type) => {
 };
 
 const soals = [
-  { text: "Soal 1:\nAda 8 kunyit yang akan dibagikan kepada 2 anak sama banyak.\nBerapa kunyit yang didapat setiap anak?", answer: 4, op1: 8, op2: 2, operator: ':' },
-  { text: "Soal 2:\nIbu punya 12 singkong. Singkong tersebut dimasukkan ke dalam 3 piring sama rata.\nBerapa isi singkong di setiap piring?", answer: 4, op1: 12, op2: 3, operator: ':' },
-  { text: "Soal 3:\n10 buah mangga dibagikan kepada 5 orang teman.\nBerapa mangga yang diterima setiap teman?", answer: 2, op1: 10, op2: 5, operator: ':' },
-  { text: "Soal 4:\nAyah membawa 6 kelapa. Kelapa itu diberikan kepada 3 tetangga.\nBerapa kelapa yang diterima satu tetangga?", answer: 2, op1: 6, op2: 3, operator: ':' },
-  { text: "Soal 5:\nAda 10 ayam yang dimasukkan ke dalam 2 kandang sama banyak.\nBerapa ayam di setiap kandang?", answer: 5, op1: 10, op2: 2, operator: ':' }
+  { text: "Soal 1:\nAda 8 kunyit yang akan dibagikan kepada 2 anak sama banyak.\nBerapa kunyit yang didapat setiap anak?", answer: 4, op1: 8, op2: 2, operator: ':', correctItem: 'KUNYIT' },
+  { text: "Soal 2:\nIbu punya 12 singkong. Singkong tersebut dimasukkan ke dalam 3 piring sama rata.\nBerapa isi singkong di setiap piring?", answer: 4, op1: 12, op2: 3, operator: ':', correctItem: 'SINGKONG' },
+  { text: "Soal 3:\n10 buah mangga dibagikan kepada 5 orang teman.\nBerapa mangga yang diterima setiap teman?", answer: 2, op1: 10, op2: 5, operator: ':', correctItem: 'MANGGA' },
+  { text: "Soal 4:\nAyah membawa 6 kelapa. Kelapa itu diberikan kepada 3 tetangga.\nBerapa kelapa yang diterima satu tetangga?", answer: 2, op1: 6, op2: 3, operator: ':', correctItem: 'KELAPA' },
+  { text: "Soal 5:\nAda 10 ayam yang dimasukkan ke dalam 2 kandang sama banyak.\nBerapa ayam di setiap kandang?", answer: 5, op1: 10, op2: 2, operator: ':', correctItem: 'AYAM' }
 ];
 
 const DraggableGridItem = ({ img, type, fromId }) => {
@@ -63,17 +64,26 @@ const GridSlot = ({ id, onDrop, content, isFilled, status }) => {
   );
 };
 
-const DraggableIcon = ({ type, img }) => {
+const DraggableIcon = ({ type, img, isCorrectItem }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.ICON,
         item: { type, img, origin: 'sidebar' },
+        canDrag: isCorrectItem,
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
-    }));
+    }), [isCorrectItem]);
 
     return (
-        <div ref={drag} className="sidebar-icon" style={{ opacity: isDragging ? 0.5 : 1 }}>
+        <div 
+            ref={drag} 
+            className="sidebar-icon" 
+            style={{ 
+                opacity: isDragging ? 0.5 : (isCorrectItem ? 1 : 0.4), 
+                cursor: isCorrectItem ? 'grab' : 'not-allowed',
+                filter: isCorrectItem ? 'none' : 'grayscale(100%)'
+            }}
+        >
             <img src={img} alt={type} />
         </div>
     );
@@ -179,6 +189,8 @@ const PembagianGame = () => {
   const [popup, setPopup] = useState({ show: false, message: '', type: 'text', imageSrc: '' });
   const [showFaq, setShowFaq] = useState(false);
   const [validation, setValidation] = useState({});
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isAnsweredCorrectly, setIsAnsweredCorrectly] = useState(false);
 
   useEffect(() => {
       // Initialize grids based on the divisor (op2)
@@ -194,6 +206,8 @@ const PembagianGame = () => {
       setZones({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
       setValidation({});
       setPopup({ show: false, message: '', type: 'text', imageSrc: '' });
+      setShowSuccess(false);
+      setIsAnsweredCorrectly(false);
   }, [currentQuestion]);
 
   const removeItem = (origin, id) => {
@@ -308,6 +322,7 @@ const PembagianGame = () => {
          playSound('success');
          setShowSuccess(true);
          setPopup({ show: true, message: 'Benar! Luar biasa!', type: 'text' });
+         setIsAnsweredCorrectly(true);
      } else {
          playSound('error');
          let msg = 'Masih ada yang salah, ayo coba lagi!';
@@ -326,6 +341,26 @@ const PembagianGame = () => {
      }
   };
 
+  const handleRepeat = () => {
+    setIsAnsweredCorrectly(false);
+    const question = soals[currentQuestion];
+    const newGrids = {};
+    for (let i = 0; i < question.op2; i++) {
+        newGrids[`group${i}`] = Array(question.op1).fill(null);
+    }
+    setGrids(newGrids);
+    setZones({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
+    setValidation({});
+    setPopup({ show: false, message: '', type: 'text', imageSrc: '' });
+    setShowSuccess(false);
+  };
+
+  const nextQuestion = () => {
+      if (currentQuestion < soals.length - 1) {
+          setCurrentQuestion(currentQuestion + 1);
+      }
+  };
+
   return (
     <div className="pembagian-bg">
       {/* Header */}
@@ -342,7 +377,12 @@ const PembagianGame = () => {
           {/* Sidebar */}
           <div className="sidebar">
               {['MANGGA', 'KUNYIT', 'SINGKONG', 'KELAPA', 'AYAM'].map(item => (
-                  <DraggableIcon key={item} type={item} img={`/assets/${item}.png`} />
+                  <DraggableIcon 
+                      key={item} 
+                      type={item} 
+                      img={`/assets/${item}.png`} 
+                      isCorrectItem={item === soals[currentQuestion].correctItem}
+                  />
               ))}
           </div>
 
@@ -385,7 +425,16 @@ const PembagianGame = () => {
               </div>
 
               <div className="action-container">
-                  <button className="check-button" onClick={checkResult}>KOREKSI</button>
+                  {!isAnsweredCorrectly ? (
+                      <button className="check-button" onClick={checkResult}>KOREKSI</button>
+                  ) : (
+                      <div style={{ display: 'flex', gap: '15px' }}>
+                          <button className="check-button" style={{ backgroundColor: '#2196F3', boxShadow: '0 4px 0 #1976D2' }} onClick={handleRepeat}>Ulangi</button>
+                          {currentQuestion < soals.length - 1 && (
+                              <button className="check-button" style={{ backgroundColor: '#4CAF50', boxShadow: '0 4px 0 #388E3C' }} onClick={nextQuestion}>Berikutnya</button>
+                          )}
+                      </div>
+                  )}
 
                   <div className="number-strip">
                       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
@@ -437,8 +486,9 @@ const PembagianGame = () => {
 };
 
 const Pembagian = () => (
-  <DndProvider backend={HTML5Backend}>
+  <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
     <PembagianGame />
+    <CustomDragLayer />
   </DndProvider>
 );
 

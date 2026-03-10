@@ -3,11 +3,17 @@ import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import Pengurangan from './Pengurangan';
 
-// Mock react-dnd to avoid HTML5Backend issues in test environment
-vi.mock('react-dnd-html5-backend', () => ({
-  HTML5Backend: {},
+// Mock react-dnd-touch-backend
+vi.mock('react-dnd-touch-backend', () => ({
+  TouchBackend: {},
 }));
 
+// Mock CustomDragLayer
+vi.mock('../components/CustomDragLayer', () => ({
+  CustomDragLayer: () => <div data-testid="custom-drag-layer" />,
+}));
+
+// Mock react-dnd
 vi.mock('react-dnd', async () => {
   const actual = await vi.importActual('react-dnd');
   return {
@@ -57,7 +63,7 @@ describe('Pengurangan Component', () => {
         <Pengurangan />
       </BrowserRouter>
     );
-    expect(screen.getByAltText('BOLA')).toBeInTheDocument();
+    expect(screen.getByAltText('MANGGA')).toBeInTheDocument();
   });
 
   it('renders draggable numbers', () => {
@@ -72,6 +78,15 @@ describe('Pengurangan Component', () => {
     // Static operators should be present
     expect(screen.getAllByText('-').length).toBeGreaterThan(0);
     expect(screen.getAllByText('=').length).toBeGreaterThan(0);
+  });
+
+  it('renders CustomDragLayer', () => {
+    render(
+      <BrowserRouter>
+        <Pengurangan />
+      </BrowserRouter>
+    );
+    expect(screen.getByTestId('custom-drag-layer')).toBeInTheDocument();
   });
 
   it('navigates through questions', () => {

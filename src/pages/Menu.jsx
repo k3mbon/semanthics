@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function Menu() {
   const audioRef = useRef(null);
@@ -18,7 +19,8 @@ export default function Menu() {
   }, []);
 
   return (
-    <div className="relative w-screen h-dvh flex flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-sky-light to-sky-dark font-fredoka">
+    <div className="relative w-screen min-h-dvh flex flex-col items-center justify-start bg-gradient-to-b from-sky-light to-sky-dark font-fredoka overflow-x-hidden">
+      <ScrollToTop />
       {/* Background Overlay */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
@@ -28,7 +30,7 @@ export default function Menu() {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-between p-4 md:p-10">
+      <div className="relative z-10 w-full min-h-dvh flex flex-col justify-between p-4 md:p-10">
         {/* Header */}
         <header className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4 justify-center md:justify-start">
@@ -64,7 +66,7 @@ export default function Menu() {
 
         {/* Center Menus */}
         <div className="flex-grow flex items-center justify-center">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center max-h-full overflow-y-auto p-4">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center p-4">
             <Link 
               to="/panduan"
               className="bg-white rounded-3xl px-6 py-6 md:px-8 md:py-10 text-lg md:text-xl font-medium no-underline shadow-xl hover:scale-105 transition-transform duration-200 relative overflow-hidden flex flex-col items-center text-blue-500 w-48 md:w-auto"
@@ -94,13 +96,6 @@ export default function Menu() {
 
         {/* Footer */}
         <div className="w-full flex justify-center items-end relative h-10">
-             {/* Dots */}
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2.5">
-               {[...Array(5)].map((_, i) => (
-                 <div key={i} className={`w-2 h-2 md:w-3 md:h-3 rounded-full cursor-pointer transition-colors duration-300 ${i === 0 ? 'bg-white' : 'bg-white/60'}`} />
-               ))}
-            </div>
-            
             {/* Bottom Right AI */}
             <div className="absolute bottom-0 right-0 text-white text-sm md:text-xl drop-shadow-sm">
               FIP UNDIKSHA

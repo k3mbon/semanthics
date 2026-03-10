@@ -3,11 +3,17 @@ import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import Penjumlahan from './Penjumlahan';
 
-// Mock react-dnd to avoid HTML5Backend issues in test environment
-vi.mock('react-dnd-html5-backend', () => ({
-  HTML5Backend: {},
+// Mock react-dnd-touch-backend
+vi.mock('react-dnd-touch-backend', () => ({
+  TouchBackend: {},
 }));
 
+// Mock CustomDragLayer
+vi.mock('../components/CustomDragLayer', () => ({
+  CustomDragLayer: () => <div data-testid="custom-drag-layer" />,
+}));
+
+// Mock react-dnd
 vi.mock('react-dnd', async () => {
   const actual = await vi.importActual('react-dnd');
   return {
@@ -45,7 +51,8 @@ describe('Penjumlahan Component', () => {
         <Penjumlahan />
       </BrowserRouter>
     );
-    // There are 2 groups of 10 slots = 20 slots
+    // Soal 1: 5 + 3 = 8.
+    // 2 groups * 10 slots = 20 slots.
     const slots = container.getElementsByClassName('grid-slot');
     expect(slots.length).toBe(20);
   });
@@ -56,7 +63,8 @@ describe('Penjumlahan Component', () => {
         <Penjumlahan />
       </BrowserRouter>
     );
-    expect(screen.getByAltText('BOLA')).toBeInTheDocument();
+    // Check for MANGGA instead of BOLA
+    expect(screen.getByAltText('MANGGA')).toBeInTheDocument();
   });
 
   it('renders draggable numbers', () => {
@@ -65,12 +73,20 @@ describe('Penjumlahan Component', () => {
         <Penjumlahan />
       </BrowserRouter>
     );
-    // Check for a few numbers
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('5')).toBeInTheDocument();
-    // Use getAllByText because + and = appear in both counting area and equation bar
+    // + and =
     expect(screen.getAllByText('+').length).toBeGreaterThan(0);
     expect(screen.getAllByText('=').length).toBeGreaterThan(0);
+  });
+
+  it('renders CustomDragLayer', () => {
+    render(
+      <BrowserRouter>
+        <Penjumlahan />
+      </BrowserRouter>
+    );
+    expect(screen.getByTestId('custom-drag-layer')).toBeInTheDocument();
   });
 
   it('navigates through questions', () => {

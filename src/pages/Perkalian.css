@@ -12,13 +12,13 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f3e8ff; /* Light Purple fallback */
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 .perkalian-bg {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -136,6 +136,9 @@ body {
     height: 60px;
     cursor: grab;
     transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar-icon img {
@@ -494,15 +497,22 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        overflow-y: auto !important;
+        height: auto !important;
+    }
+
     .perkalian-bg {
-        height: 100vh;
-        overflow: hidden;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
     }
 
     .main-layout {
         flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
+        overflow: visible;
+        height: auto;
+        flex: none;
         padding-bottom: 20px;
     }
     
@@ -516,6 +526,7 @@ body {
         justify-content: flex-start;
         padding: 5px 10px;
         gap: 15px;
+        background-color: rgba(255, 255, 255, 0.6);
     }
 
     .exit-button {
@@ -536,6 +547,17 @@ body {
     .question-card {
         width: 95%;
         max-width: none;
+        height: auto;
+        min-height: auto;
+    }
+
+    .question-text {
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+        display: block;
+        overflow: visible;
+        font-size: 1rem;
+        padding: 5px 0;
     }
     
     .game-center {
@@ -543,6 +565,8 @@ body {
         gap: 15px;
         padding-top: 10px;
         width: 100%;
+        height: auto;
+        overflow-y: visible;
     }
 
     .counting-area {

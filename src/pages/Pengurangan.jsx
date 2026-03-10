@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import { Link } from 'react-router-dom';
 import { validateSubtraction } from '../utils/mathOperations';
 import './Pengurangan.css';
 import SuccessFeedback from '../components/SuccessFeedback';
+import { CustomDragLayer } from '../components/CustomDragLayer';
 
 /**
  * Item types for Drag and Drop functionality
@@ -28,11 +29,11 @@ const playSound = (type) => {
 };
 
 const soals = [
-  { text: "Soal 1:\nDoni memiliki 10 kunyit. Ia memberikan 4 kunyit kepada temannya.\nBerapa kunyit yang masih dimiliki Doni?", answer: 6, op1: 10, op2: 4, operator: '-' },
-  { text: "Soal 2:\nSeorang peternak memiliki 8 ayam. Ia menjual 3 ayam ke pasar.\nBerapa ayam yang masih ada di kandang?", answer: 5, op1: 8, op2: 3, operator: '-' }, // Adjusted to < 10 for better visual fit with reference
-  { text: "Soal 3:\nWayan memetik 9 kelapa dari pohon. Ia membagikan 5 kelapa kepada tetangganya.\nBerapa kelapa yang masih dimilikinya?", answer: 4, op1: 9, op2: 5, operator: '-' }, // Adjusted
-  { text: "Soal 4:\nIbu membuat 10 singkong. 7 singkong diberikan ke tamu.\nBerapa singkong yang masih tersisa di meja?", answer: 3, op1: 10, op2: 7, operator: '-' }, // Adjusted
-  { text: "Soal 5:\nMade membawa 7 mangga ke pasar. Ia berhasil menjual 2 mangga.\nBerapa mangga yang belum terjual?", answer: 5, op1: 7, op2: 2, operator: '-' } // Adjusted
+  { text: "Soal 1:\nDoni memiliki 10 kunyit. Ia memberikan 4 kunyit kepada temannya.\nBerapa kunyit yang masih dimiliki Doni?", answer: 6, op1: 10, op2: 4, operator: '-', correctItem: 'KUNYIT' },
+  { text: "Soal 2:\nSeorang peternak memiliki 8 ayam. Ia menjual 3 ayam ke pasar.\nBerapa ayam yang masih ada di kandang?", answer: 5, op1: 8, op2: 3, operator: '-', correctItem: 'AYAM' }, 
+  { text: "Soal 3:\nWayan memetik 9 kelapa dari pohon. Ia membagikan 5 kelapa kepada tetangganya.\nBerapa kelapa yang masih dimilikinya?", answer: 4, op1: 9, op2: 5, operator: '-', correctItem: 'KELAPA' }, 
+  { text: "Soal 4:\nIbu membuat 10 singkong. 7 singkong diberikan ke tamu.\nBerapa singkong yang masih tersisa di meja?", answer: 3, op1: 10, op2: 7, operator: '-', correctItem: 'SINGKONG' }, 
+  { text: "Soal 5:\nMade membawa 7 mangga ke pasar. Ia berhasil menjual 2 mangga.\nBerapa mangga yang belum terjual?", answer: 5, op1: 7, op2: 2, operator: '-', correctItem: 'MANGGA' } 
 ];
 
 const DraggableGridItem = ({ img, type, fromId }) => {
@@ -74,17 +75,26 @@ const GridSlot = ({ id, onDrop, content, isFilled, status }) => {
   );
 };
 
-const DraggableIcon = ({ type, img }) => {
+const DraggableIcon = ({ type, img, isCorrectItem }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.ICON,
         item: { type, img, origin: 'sidebar' },
+        canDrag: isCorrectItem,
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
-    }));
+    }), [isCorrectItem]);
 
     return (
-        <div ref={drag} className="sidebar-icon" style={{ opacity: isDragging ? 0.5 : 1 }}>
+        <div 
+            ref={drag} 
+            className="sidebar-icon" 
+            style={{ 
+                opacity: isDragging ? 0.5 : (isCorrectItem ? 1 : 0.4), 
+                cursor: isCorrectItem ? 'grab' : 'not-allowed',
+                filter: isCorrectItem ? 'none' : 'grayscale(100%)'
+            }}
+        >
             <img src={img} alt={type} />
         </div>
     );
@@ -210,6 +220,7 @@ const PenguranganGame = () => {
   const [showFaq, setShowFaq] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [validation, setValidation] = useState({});
+  const [isAnsweredCorrectly, setIsAnsweredCorrectly] = useState(false);
 
   useEffect(() => {
       const size = Math.max(10, soals[currentQuestion].op1);
@@ -217,6 +228,7 @@ const PenguranganGame = () => {
       setGrids({ group1: Array(size).fill(null), group2: Array(size).fill(null) });
       setValidation({});
       setPopup({ show: false, message: '', type: 'text', imageSrc: '' });
+      setIsAnsweredCorrectly(false);
   }, [currentQuestion]);
 
   const removeItem = (origin, id) => {
@@ -337,6 +349,7 @@ const PenguranganGame = () => {
          }
 
          setPopup({ show: true, message: 'Benar! Luar biasa! 🎉', type: 'success' });
+         setIsAnsweredCorrectly(true);
      } else {
          playSound('error');
          let msg = 'Masih ada yang salah, ayo coba lagi! 💪';
@@ -356,6 +369,15 @@ const PenguranganGame = () => {
       } else {
           setPopup({ show: true, message: 'Selamat! Kamu telah menyelesaikan semua soal! 🌟', type: 'finish' });
       }
+  };
+
+  const handleRepeat = () => {
+    setIsAnsweredCorrectly(false);
+    const size = Math.max(10, soals[currentQuestion].op1);
+    setZones({ zone1: null, zone2: null, zone3: null, zone4: null, zone5: null });
+    setGrids({ group1: Array(size).fill(null), group2: Array(size).fill(null) });
+    setValidation({});
+    setPopup({ show: false, message: '', type: 'text', imageSrc: '' });
   };
 
   const prevQuestion = () => {
@@ -387,7 +409,12 @@ const PenguranganGame = () => {
           {/* Sidebar */}
           <div className="sidebar">
               {['MANGGA', 'KUNYIT', 'SINGKONG', 'KELAPA', 'AYAM'].map(item => (
-                  <DraggableIcon key={item} type={item} img={`/pengurangan/assets/${item}.png`} />
+                  <DraggableIcon 
+                      key={item} 
+                      type={item} 
+                      img={`/pengurangan/assets/${item}.png`} 
+                      isCorrectItem={item === soals[currentQuestion].correctItem}
+                  />
               ))}
           </div>
 
@@ -418,7 +445,16 @@ const PenguranganGame = () => {
               </div>
 
               <div className="action-container">
-                  <button className="check-button" onClick={checkResult}>KOREKSI</button>
+                  {!isAnsweredCorrectly ? (
+                      <button className="check-button" onClick={checkResult}>KOREKSI</button>
+                  ) : (
+                      <div style={{ display: 'flex', gap: '15px' }}>
+                          <button className="check-button" style={{ backgroundColor: '#2196F3', boxShadow: '0 4px 0 #1976D2' }} onClick={handleRepeat}>Ulangi</button>
+                          {currentQuestion < soals.length - 1 && (
+                              <button className="check-button" style={{ backgroundColor: '#4CAF50', boxShadow: '0 4px 0 #388E3C' }} onClick={nextQuestion}>Berikutnya</button>
+                          )}
+                      </div>
+                  )}
               
                   <div className="number-strip">
                       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
@@ -471,8 +507,9 @@ const PenguranganGame = () => {
 };
 
 const Pengurangan = () => (
-  <DndProvider backend={HTML5Backend}>
+  <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
     <PenguranganGame />
+    <CustomDragLayer />
   </DndProvider>
 );
 
